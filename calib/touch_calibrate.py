@@ -57,17 +57,20 @@ def click_points(frame, n):
     def on_mouse(event, x, y, *_):
         if event == cv2.EVENT_LBUTTONDOWN and len(pts) < n:
             pts.append((float(x), float(y)))
+            print(f"  clicked {len(pts)}/{n}" + ("  -> now press Enter or Space in the image window" if len(pts) == n else ""))
             draw()
 
     cv2.namedWindow(win)
     cv2.setMouseCallback(win, on_mouse)
     draw()
+    print(f"\nClick the {n} mark centres in the image window. Keys (u, Enter) go to that window, not the terminal.")
     while True:
         k = cv2.waitKey(30) & 0xFF
         if k == ord("u") and pts:
             pts.pop()
+            print(f"  undone, {len(pts)}/{n}")
             draw()
-        if k in (13, 10) and len(pts) == n:
+        if k in (13, 10, 32) and len(pts) == n:
             break
     cv2.destroyWindow(win)
     cv2.waitKey(1)
@@ -129,10 +132,10 @@ def main():
     img_pts = click_points(frame, args.n)
 
     follower = SO101Follower(SO101FollowerConfig(
-        port=args.follower_port, id="follower", disable_torque_on_disconnect=False, max_relative_target=10))
+        port=args.follower_port, id="follower", disable_torque_on_disconnect=False, max_relative_target=10.0))
     leader = SO101Leader(SO101LeaderConfig(port=args.leader_port, id="leader"))
-    follower.connect(calibrate=False)
-    leader.connect(calibrate=False)
+    follower.connect()
+    leader.connect()
     try:
         joints = touch_points(follower, leader, args.n)
     finally:
