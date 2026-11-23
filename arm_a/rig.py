@@ -33,7 +33,7 @@ JOINT_SPEED_DEG_S = 60.0
 CONTROL_HZ = 30
 
 BOWL_HEIGHT_MM = 76.0        # bowls are 7.6 cm tall
-TRAVEL_H_EMPTY = 100.0       # fingertips clear the bowl rims by ~2.5 cm
+TRAVEL_H_EMPTY = 125.0       # same as holding: when tilted over a bowl the open jaw hangs ~2 cm below the centre (23 Nov)
 TRAVEL_H_HOLDING = 125.0     # a held piece hangs up to ~15 mm below the fingertips: ~3 cm clearance
 LONG_MOVE_MM = 30.0          # horizontal moves longer than this go up, across, then down
 
@@ -219,24 +219,21 @@ class Rig:
                         np.array([goal[0], goal[1], max(goal[2], travel)])]
         corners.append(goal)
         yaw0 = q[4] - ROLL_NEUTRAL_DEG
-        path = []
-        for leg, (a, b) in enumerate(zip(corners[:-1], corners[1:])):
-            n = max(1, int(math.ceil(np.linalg.norm(b - a) / STEP_MM)))
-            for i in range(1, n + 1):
-                wp = a + (b - a) * i / n
-                yaw = yaw0 + (yaw_deg - yaw0) * i / n if leg == 0 else yaw_deg  # turn the wrist on the first leg
-                q, err, _ = self.kin.ik_point(q, wp, yaw, GRASP_OFFSET_MM)
-                if err > MAX_IK_ERROR_MM:
-                    return {"ok": False, "error": f"no joint solution for a point on the way (error {err:.0f} mm); arm did not move"}
-                path.append(q)
-        q0 = self._read_q()
-        for qi in path:  # follow the waypoints at the speed limit
-            steps = max(1, int(math.ceil(float(np.max(np.abs(qi - q0))) / JOINT_SPEED_DEG_S * CONTROL_HZ)))
-            for _ in range(steps):
-                self._send(qi, self.grip_target)
-                time.sleep(1 / CONTROL_HZ)
-            q0 = qi
-        self._drive_joints(path[-1])
+        path = self._cartesian_path(q, corners, yaw0, yaw_deg)
+        via_joint_move = False
+        if path is None:
+            # Usually the folded rest pose, where a straight line up is out of reach: swing in joint space
+            # to a point above the goal at travel height, then come straight down.
+            above = np.array([goal[0], goal[1], max(goal[2], travel)])
+            q_up, err, _ = self.kin.ik_point(q, above, yaw_deg, GRASP_OFFSET_MM)
+            if err > MAX_IK_ERROR_MM:
+                return {"ok": False, "error": f"no joint solution near the target (error {err:.0f} mm); arm did not move"}
+            down = self._cartesian_path(q_up, [above, goal], yaw_deg, yaw_deg)
+            if down is None:
+                return {"ok": False, "error": "no joint solution on the way down to the target; arm did not move"}
+            self._drive_joints(q_up)
+            path, via_joint_move = down, True
+        self._follow(path)
         # correct for sag: aim past the target by the accumulated miss, up to three times
         aim = goal.copy()
         for _ in range(3):
@@ -251,6 +248,7 @@ class Rig:
             self._drive_joints(q_fix)
         x1, y1, h1, tilt = self.tip()
         result = {"ok": True, "reached_mm": {"x": round(x1, 1), "y": round(y1, 1), "height": round(h1, 1)},
+                  "went_via_joint_move": via_joint_move,
                   "miss_mm": round(float(np.linalg.norm(np.array([x1, y1, h1]) - np.array([x, y, h]))), 1),
                   "gripper_tilt_from_vertical_deg": round(tilt, 1),
                   "height_clamped": h != height,
@@ -262,6 +260,31 @@ class Rig:
                 result["dropped_on_the_way"] = True
             result["holding"] = self.holding
         return result
+
+    def _cartesian_path(self, q, corners, yaw0, yaw_deg):
+        """IK for waypoints every STEP_MM along the corner-to-corner lines; None if any point is unreachable."""
+        path = []
+        for leg, (a, b) in enumerate(zip(corners[:-1], corners[1:])):
+            n = max(1, int(math.ceil(np.linalg.norm(b - a) / STEP_MM)))
+            for i in range(1, n + 1):
+                wp = a + (b - a) * i / n
+                yaw = yaw0 + (yaw_deg - yaw0) * i / n if leg == 0 else yaw_deg  # turn the wrist on the first leg
+                q, err, _ = self.kin.ik_point(q, wp, yaw, GRASP_OFFSET_MM)
+                if err > MAX_IK_ERROR_MM:
+                    return None
+                path.append(q)
+        return path
+
+    def _follow(self, path):
+        """Stream a smooth joint ramp through the waypoints at the speed limit (no stop between them)."""
+        q_prev = self._read_q()
+        for qi in path:
+            steps = max(1, int(math.ceil(float(np.max(np.abs(qi - q_prev))) / JOINT_SPEED_DEG_S * CONTROL_HZ)))
+            for k in range(1, steps + 1):
+                self._send(q_prev + (qi - q_prev) * k / steps, self.grip_target)
+                time.sleep(1 / CONTROL_HZ)
+            q_prev = qi
+        self._drive_joints(path[-1])
 
     def gripper(self, action):
         if action == "open":
