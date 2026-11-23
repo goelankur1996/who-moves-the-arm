@@ -1,3 +1,6 @@
 trial_id,layout_id,condition,arm,run_order,date,scorer,success,progress,failure_tag,duration_s,tool_calls,api_cost_usd,decision_latency_s,rerun_reason,notes
 dry_01,,E1,A,,2026-11-23,live,0,1,reach,113.7,26,0.5893,4.57,,reached the object but not around it. the stationary finger push the object further from base out of gray zone. Tried to grasp 2-3 times.
 dry_02,,E1,A,,2026-11-23,live,1,4,,50.3,16,0.0827,1.89,,the motion is slightly jittery and upon return the fingers of the gripper collided with the bowl
+dry_03,,E1,A,,2026-11-23,live,1,4,,67.6,16,0.0985,3.3,,had to realign the reach for grasp a few times however it did grasp in one attempt.
+dry_04,,E1,A,,2026-11-23,live,1,4,,44.8,11,0.057,2.32,,
+dry_05,,E1,A,,2026-11-23,live,1,4,grasp,95.9,22,0.1573,4.13,,couldn't grasp the D in first attempt. Had to realign and grasp it.

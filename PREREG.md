@@ -94,4 +94,8 @@ All scored trials, failures included, are released as a LeRobot dataset after th
 
 ## Deviations
 
-None yet.
+All three entries below were added on 23 Nov 2026, before any demonstration or scored trial.
+
+1. **Lighting (clarification).** Daylight cannot be controlled at this rig. All demonstrations and scored trials are run after dark under room lights, curtains closed. A scene frame is saved at the start of each session and its mean brightness logged.
+2. **Task difficulty check (added rule).** Before demonstrations are recorded, arm A runs a 10-trial pilot on E1-style layouts that are not evaluation layouts. If arm A succeeds on 8 or more of the 10, the bowl task is judged too easy to separate the arms, and the containers are replaced with smaller cups (about 6 cm across) before any demonstration is recorded; this file is then updated before the first demonstration. Development runs before the pilot (dry runs) do not count toward this rule.
+3. **Arm A implementation details (clarification).** Positions given to and reported by arm A refer to the point midway between the open jaws (fingertips 80 mm apart at the default opening), not the fixed finger. Long moves go through a travel height of 125 mm above the table, because the bowls are 7.6 cm tall. The gripper opening is fixed. Fingers are covered with cotton sports tape for friction; the same gripper is used by every arm.
