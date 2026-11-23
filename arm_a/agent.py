@@ -1,0 +1,192 @@
+"""Arm A: Claude drives the SO-101 through five tools.
+
+Usage (arm at rest, leader not needed):
+  python -m arm_a.agent --instruction "put the orange cube in the pink bowl" \
+      --trial-id pilot_01 --layout-id P01 --condition E1
+
+Needs ANTHROPIC_API_KEY. Writes runs/<trial-id>/: log.jsonl, images, video.mp4, summary.json,
+and appends one row to the results CSV after you score the trial.
+"""
+from __future__ import annotations
+
+import argparse
+import base64
+import csv
+import json
+import os
+import time
+from pathlib import Path
+
+import anthropic
+import cv2
+
+from arm_a.rig import Recorder, Rig
+
+MODEL = "claude-opus-5-5"
+PRICE_PER_MTOK = {"input": 4.0, "output": 20.0, "cache_read": 0.20, "cache_write": 5.0}
+TIME_LIMIT_S = 120.0
+MAX_TOOL_CALLS = 25
+HERE = Path(__file__).parent
+
+TOOLS = [
+    {"name": "look", "description": "Both camera images (scene, wrist) and the arm state.",
+     "input_schema": {"type": "object", "properties": {}}},
+    {"name": "table_point", "description": "Convert a scene-image pixel on the table surface to table coordinates in mm.",
+     "input_schema": {"type": "object", "properties": {
+         "u": {"type": "number", "description": "pixel column, 0-639"},
+         "v": {"type": "number", "description": "pixel row, 0-479"}}, "required": ["u", "v"]}},
+    {"name": "move_to", "description": "Move the fingertip in a straight line to (x, y, height) mm, height above the table.",
+     "input_schema": {"type": "object", "properties": {
+         "x": {"type": "number"}, "y": {"type": "number"}, "height": {"type": "number"},
+         "yaw_deg": {"type": "number", "description": "gripper rotation about vertical, default 0"}},
+         "required": ["x", "y", "height"]}},
+    {"name": "gripper", "description": "Open or close the gripper. After closing, reports whether something is held.",
+     "input_schema": {"type": "object", "properties": {
+         "action": {"type": "string", "enum": ["open", "close"]},
+         "opening": {"type": "number", "description": "for open: 0-100, default 45"}}, "required": ["action"]}},
+    {"name": "home", "description": "Move to a safe hover position above the middle of the table.",
+     "input_schema": {"type": "object", "properties": {}}},
+]
+
+
+def jpeg_b64(img, quality=85):
+    ok, buf = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, quality])
+    return base64.b64encode(buf.tobytes()).decode()
+
+
+def image_block(img):
+    return {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": jpeg_b64(img)}}
+
+
+def cost_usd(u):
+    return (u["input"] * PRICE_PER_MTOK["input"] + u["output"] * PRICE_PER_MTOK["output"]
+            + u["cache_read"] * PRICE_PER_MTOK["cache_read"] + u["cache_write"] * PRICE_PER_MTOK["cache_write"]) / 1e6
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--instruction", required=True)
+    ap.add_argument("--trial-id", required=True)
+    ap.add_argument("--layout-id", default="")
+    ap.add_argument("--condition", default="")
+    ap.add_argument("--run-order", default="")
+    ap.add_argument("--urdf", default=os.path.expanduser("~/SO-ARM100/Simulation/SO101/so101_new_calib.urdf"))
+    ap.add_argument("--calib", default="calib/touch_calib_v2.json")
+    ap.add_argument("--prompt", default=str(HERE / "system_prompt_v1.md"))
+    ap.add_argument("--results", default="results/pilot_a.csv")
+    args = ap.parse_args()
+
+    out = Path("runs") / args.trial_id
+    (out / "images").mkdir(parents=True, exist_ok=False)
+    logf = open(out / "log.jsonl", "a")
+
+    def log(kind, **kw):
+        logf.write(json.dumps({"t": round(time.time(), 3), "kind": kind, **kw}) + "\n")
+        logf.flush()
+
+    system = open(args.prompt).read()
+    client = anthropic.Anthropic()
+    rig = Rig(args.urdf, args.calib)
+    rec = Recorder(str(out / "video.mp4"), rig.scene, rig.wrist)
+    usage = {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0}
+    n_calls, n_images, api_latency, final_text = 0, 0, [], ""
+    stop_reason = "model_finished"
+
+    def save(img, tag):
+        nonlocal n_images
+        n_images += 1
+        cv2.imwrite(str(out / "images" / f"{n_images:03d}_{tag}.jpg"), img)
+
+    try:
+        rig.gripper("open")
+        scene, wrist, state = rig.look()
+        save(scene, "scene"); save(wrist, "wrist")
+        messages = [{"role": "user", "content": [
+            {"type": "text", "text": f"Instruction: {args.instruction}\nCurrent arm state: {json.dumps(state)}\nScene image, then wrist image:"},
+            image_block(scene), image_block(wrist)]}]
+        log("start", instruction=args.instruction, model=MODEL, prompt=args.prompt, state=state)
+        t_start = time.time()
+
+        while True:
+            if time.time() - t_start > TIME_LIMIT_S:
+                stop_reason = "time_limit"; break
+            t0 = time.time()
+            resp = client.messages.create(
+                model=MODEL, max_tokens=2048, tools=TOOLS, messages=messages,
+                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}])
+            api_latency.append(time.time() - t0)
+            u = resp.usage
+            usage["input"] += u.input_tokens; usage["output"] += u.output_tokens
+            usage["cache_read"] += getattr(u, "cache_read_input_tokens", 0) or 0
+            usage["cache_write"] += getattr(u, "cache_creation_input_tokens", 0) or 0
+            messages.append({"role": "assistant", "content": resp.content})
+            texts = [b.text for b in resp.content if b.type == "text"]
+            calls = [b for b in resp.content if b.type == "tool_use"]
+            log("model", latency_s=round(api_latency[-1], 2), text=texts, calls=[{"name": c.name, "input": c.input} for c in calls])
+            if texts:
+                final_text = texts[-1]
+            if not calls:
+                break
+            results = []
+            for c in calls:
+                n_calls += 1
+                if n_calls > MAX_TOOL_CALLS:
+                    stop_reason = "call_limit"; break
+                t1 = time.time()
+                if c.name == "look":
+                    scene, wrist, state = rig.look()
+                    save(scene, "scene"); save(wrist, "wrist")
+                    content = [{"type": "text", "text": json.dumps(state) + "\nScene image, then wrist image:"},
+                               image_block(scene), image_block(wrist)]
+                    logged = state
+                else:
+                    try:
+                        r = getattr(rig, c.name)(**c.input)
+                    except Exception as e:  # a bad argument should not kill the trial
+                        r = {"ok": False, "error": f"{type(e).__name__}: {e}"}
+                    content, logged = json.dumps(r), r
+                log("tool", name=c.name, input=c.input, result=logged, duration_s=round(time.time() - t1, 2))
+                print(f"  {c.name}({json.dumps(c.input)}) -> {json.dumps(logged)[:160]}")
+                results.append({"type": "tool_result", "tool_use_id": c.id, "content": content})
+            if stop_reason == "call_limit":
+                break
+            messages.append({"role": "user", "content": results})
+    finally:
+        duration = time.time() - t_start if "t_start" in locals() else 0.0
+        try:
+            rig.home()
+        finally:
+            rec.close()
+            rig.close()
+
+    summary = {"trial_id": args.trial_id, "instruction": args.instruction, "stop_reason": stop_reason,
+               "duration_s": round(duration, 1), "tool_calls": n_calls, "usage": usage,
+               "api_cost_usd": round(cost_usd(usage), 4),
+               "mean_decision_latency_s": round(sum(api_latency) / max(1, len(api_latency)), 2),
+               "final_text": final_text}
+    json.dump(summary, open(out / "summary.json", "w"), indent=2)
+    print(json.dumps(summary, indent=2))
+
+    print("\nScore this trial.")
+    success = input("  success (1/0): ").strip()
+    progress = input("  progress 0-4 (1 reached, 2 holding, 3 over the bowl, 4 released inside): ").strip()
+    tag = input("  failure tag (perception/reach/grasp/transport/release/freeze/none): ").strip()
+    notes = input("  notes: ").strip()
+    path = Path(args.results)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    new = not path.exists()
+    with open(path, "a", newline="") as f:
+        w = csv.writer(f)
+        if new:
+            w.writerow(["trial_id", "layout_id", "condition", "arm", "run_order", "date", "scorer", "success",
+                        "progress", "failure_tag", "duration_s", "tool_calls", "api_cost_usd",
+                        "decision_latency_s", "rerun_reason", "notes"])
+        w.writerow([args.trial_id, args.layout_id, args.condition, "A", args.run_order, time.strftime("%Y-%m-%d"),
+                    "live", success, progress, tag, summary["duration_s"], n_calls, summary["api_cost_usd"],
+                    summary["mean_decision_latency_s"], "", notes])
+    log("scored", success=success, progress=progress, failure_tag=tag, notes=notes)
+    print(f"saved {out} and a row in {path}")
+
+
+if __name__ == "__main__":
+    main()
