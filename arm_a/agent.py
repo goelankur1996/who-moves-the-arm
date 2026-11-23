@@ -17,6 +17,8 @@ import os
 import time
 from pathlib import Path
 
+import threading
+
 import anthropic
 import cv2
 
@@ -61,6 +63,38 @@ TOOLS = [
 ]
 
 
+class LiveView:
+    """Rerun window with both cameras at 5 Hz, half size, JPEG-compressed, plus a text log of every step.
+    It only reads the latest camera frames already in memory; it never touches the motor bus,
+    so it cannot slow the arm's control."""
+
+    def __init__(self, scene, wrist, hz=5.0):
+        import rerun as rr
+        self.rr, self.scene, self.wrist, self.hz = rr, scene, wrist, hz
+        rr.init("who-moves-the-arm: arm A")
+        rr.spawn(memory_limit="10%")
+        self._stop = False
+        self.thread = threading.Thread(target=self._run, daemon=True)
+        self.thread.start()
+
+    def _run(self):
+        rr = self.rr
+        while not self._stop:
+            t = time.time()
+            for name, cam in (("scene", self.scene), ("wrist", self.wrist)):
+                img, _ = cam.latest()
+                small = cv2.cvtColor(cv2.resize(img, (320, 240)), cv2.COLOR_BGR2RGB)
+                rr.log(f"camera/{name}", rr.Image(small).compress(jpeg_quality=70), static=True)
+            time.sleep(max(0.0, 1 / self.hz - (time.time() - t)))
+
+    def note(self, text):
+        self.rr.log("agent/log", self.rr.TextLog(text))
+
+    def close(self):
+        self._stop = True
+        self.thread.join(timeout=2)
+
+
 def jpeg_b64(img, quality=85):
     ok, buf = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, quality])
     return base64.b64encode(buf.tobytes()).decode()
@@ -86,6 +120,7 @@ def main():
     ap.add_argument("--calib", default="calib/touch_calib_v2.json")
     ap.add_argument("--prompt", default=str(HERE / "system_prompt_v1.md"))
     ap.add_argument("--results", default="results/pilot_a.csv")
+    ap.add_argument("--no-viewer", action="store_true", help="skip the live Rerun window")
     args = ap.parse_args()
 
     out = Path("runs") / args.trial_id
@@ -101,6 +136,13 @@ def main():
     client = anthropic.Anthropic()
     rig = Rig(args.urdf, args.calib)
     rec = Recorder(str(out / "video.mp4"), rig.scene, rig.wrist)
+    view = None
+    if not args.no_viewer:
+        try:
+            view = LiveView(rig.scene, rig.wrist)
+            view.note(f"{args.trial_id}: {args.instruction}")
+        except Exception as e:  # the trial does not depend on the viewer
+            print(f"live view unavailable: {e}")
     usage = {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0}
     n_calls, n_images, api_latency, final_text = 0, 0, [], ""
     stop_reason = "model_finished"
@@ -136,6 +178,8 @@ def main():
             texts = [b.text for b in resp.content if b.type == "text"]
             calls = [b for b in resp.content if b.type == "tool_use"]
             log("model", latency_s=round(api_latency[-1], 2), text=texts, calls=[{"name": c.name, "input": c.input} for c in calls])
+            if view and texts:
+                view.note("Claude: " + " ".join(texts)[:300])
             if texts:
                 final_text = texts[-1]
             if not calls:
@@ -159,7 +203,10 @@ def main():
                         r = {"ok": False, "error": f"{type(e).__name__}: {e}"}
                     content, logged = json.dumps(r), r
                 log("tool", name=c.name, input=c.input, result=logged, duration_s=round(time.time() - t1, 2))
-                print(f"  {c.name}({json.dumps(c.input)}) -> {json.dumps(logged)[:160]}")
+                line = f"{c.name}({json.dumps(c.input)}) -> {json.dumps(logged)[:160]}"
+                print("  " + line)
+                if view:
+                    view.note(line)
                 results.append({"type": "tool_result", "tool_use_id": c.id, "content": content})
             if stop_reason == "call_limit":
                 break
@@ -170,6 +217,9 @@ def main():
             rig.home()
         finally:
             rec.close()
+            if view:
+                view.note(f"stopped: {stop_reason}")
+                view.close()
             rig.close()
 
     summary = {"trial_id": args.trial_id, "instruction": args.instruction, "stop_reason": stop_reason,
@@ -180,11 +230,17 @@ def main():
     json.dump(summary, open(out / "summary.json", "w"), indent=2)
     print(json.dumps(summary, indent=2))
 
-    print("\nScore this trial.")
+    print("""
+Score this trial (see SCORING.md):
+  progress = highest stage reached: 0 nothing useful, 1 fingers at the object, 2 lifted it,
+             3 carried it over the named bowl, 4 it ended inside the named bowl
+  success  = 1 only if the named object is fully inside the named bowl, gripper open, within 120 s
+  failure tag = the FIRST thing that went wrong: perception / reach / grasp / transport / release / freeze
+             (none if success)""")
     success = input("  success (1/0): ").strip()
-    progress = input("  progress 0-4 (1 reached, 2 holding, 3 over the bowl, 4 released inside): ").strip()
-    tag = input("  failure tag (perception/reach/grasp/transport/release/freeze/none): ").strip()
-    notes = input("  notes: ").strip()
+    progress = input("  progress (0-4): ").strip()
+    tag = input("  failure tag: ").strip()
+    notes = input("  notes (anything odd; Enter to skip): ").strip()
     path = Path(args.results)
     path.parent.mkdir(parents=True, exist_ok=True)
     new = not path.exists()
