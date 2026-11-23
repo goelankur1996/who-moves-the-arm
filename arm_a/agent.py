@@ -1,7 +1,7 @@
 """Arm A: Claude drives the SO-101 through five tools.
 
 Usage (arm at rest, leader not needed):
-  python -m arm_a.agent --instruction "put the orange cube in the pink cup" \
+  python -m arm_a.agent --instruction "put the orange cube in the pink tumbler" \
       --trial-id pilot_01 --layout-id P01 --condition E1
 
 Credentials: `ant auth login` (no key), or ANTHROPIC_API_KEY in the environment or ~/.config/who-moves-the-arm/.env. Writes runs/<trial-id>/: log.jsonl, images, video.mp4, summary.json,
@@ -247,8 +247,8 @@ def main():
     print("""
 Score this trial (see SCORING.md):
   progress = highest stage reached: 0 nothing useful, 1 fingers at the object, 2 lifted it,
-             3 carried it over the named cup, 4 it ended inside the named cup
-  success  = 1 only if the named object is fully inside the named cup, gripper open, within 120 s
+             3 carried it over the named container, 4 it ended inside it
+  success  = 1 only if the named object is fully inside the named container, gripper open, within 120 s
   failure tag = the FIRST thing that went wrong: perception / reach / grasp / transport / release / freeze
              (none if success)""")
     success = input("  success (1/0): ").strip()
