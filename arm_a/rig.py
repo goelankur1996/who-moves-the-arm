@@ -37,6 +37,11 @@ TRAVEL_H_EMPTY = 100.0       # fingertips clear the bowl rims by ~2.5 cm
 TRAVEL_H_HOLDING = 125.0     # a held piece hangs up to ~15 mm below the fingertips: ~3 cm clearance
 LONG_MOVE_MM = 30.0          # horizontal moves longer than this go up, across, then down
 
+# The URDF fingertip frame sits on the FIXED finger; the moving jaw opens along the frame's -x axis.
+# All positions the agent sees and sends are the point midway between the open jaws (grasp centre).
+OPEN_GAP_MM = 80.0           # gap between the fingertips at GRIPPER_OPEN, measured 23 Nov with taped fingers
+GRASP_OFFSET_MM = (-OPEN_GAP_MM / 2.0, 0.0, 0.0)
+
 GRIPPER_OPEN = 45.0          # 0 = closed, 100 = fully open (LeRobot RANGE_0_100)
 GRIPPER_CLOSED = 0.0
 HOLD_THRESHOLD = 5.0         # closed gripper reading: 0.9 empty, 14.5 on the orange cube (23 Nov, taped fingers)
@@ -171,9 +176,10 @@ class Rig:
         time.sleep(settle_s)
 
     def tip(self):
-        """Current fingertip (x, y, height above table) in mm and tilt from vertical in degrees."""
-        T = self.kin.fk(self._read_q())
-        return T[0, 3], T[1, 3], T[2, 3] - self.calib.table_z, self.kin.tilt_deg(T)
+        """Current grasp centre (x, y, height above table) in mm and gripper tilt from vertical in degrees."""
+        q = self._read_q()
+        p = self.kin.point(q, GRASP_OFFSET_MM)
+        return p[0], p[1], p[2] - self.calib.table_z, self.kin.tilt_deg(self.kin.fk(q))
 
     # ---------- the five tools ----------
     def look(self):
@@ -182,7 +188,7 @@ class Rig:
         x, y, h, tilt = self.tip()
         g = self._read_gripper()
         state = {
-            "fingertip_mm": {"x": round(x, 1), "y": round(y, 1), "height": round(h, 1)},
+            "grasp_centre_mm": {"x": round(x, 1), "y": round(y, 1), "height": round(h, 1)},
             "gripper_tilt_from_vertical_deg": round(tilt, 1),
             "gripper_opening_0_100": round(g, 1),
             "holding": self.holding,
@@ -204,7 +210,7 @@ class Rig:
         tz = self.calib.table_z
         goal = np.array([x, y, h + tz])
         q = self._read_q()
-        start = self.kin.fk(q)[:3, 3]
+        start = self.kin.point(q, GRASP_OFFSET_MM)
         # long horizontal moves go up to travel height, across, then down, so nothing sweeps into a bowl
         travel = (TRAVEL_H_HOLDING if self.holding else TRAVEL_H_EMPTY) + tz
         corners = [start]
@@ -219,7 +225,7 @@ class Rig:
             for i in range(1, n + 1):
                 wp = a + (b - a) * i / n
                 yaw = yaw0 + (yaw_deg - yaw0) * i / n if leg == 0 else yaw_deg  # turn the wrist on the first leg
-                q, err, _ = self.kin.ik(q, wp, yaw)
+                q, err, _ = self.kin.ik_point(q, wp, yaw, GRASP_OFFSET_MM)
                 if err > MAX_IK_ERROR_MM:
                     return {"ok": False, "error": f"no joint solution for a point on the way (error {err:.0f} mm); arm did not move"}
                 path.append(q)
@@ -234,12 +240,12 @@ class Rig:
         # correct for sag: aim past the target by the accumulated miss, up to three times
         aim = goal.copy()
         for _ in range(3):
-            actual = self.kin.fk(self._read_q())[:3, 3]
+            actual = self.kin.point(self._read_q(), GRASP_OFFSET_MM)
             miss = goal - actual
             if np.linalg.norm(miss) < 2.0:
                 break
             aim = aim + miss
-            q_fix, err, _ = self.kin.ik(self._read_q(), aim, yaw_deg)
+            q_fix, err, _ = self.kin.ik_point(self._read_q(), aim, yaw_deg, GRASP_OFFSET_MM)
             if err > MAX_IK_ERROR_MM:
                 break
             self._drive_joints(q_fix)
@@ -257,9 +263,9 @@ class Rig:
             result["holding"] = self.holding
         return result
 
-    def gripper(self, action, opening=None):
+    def gripper(self, action):
         if action == "open":
-            self.grip_target = float(opening) if opening is not None else GRIPPER_OPEN
+            self.grip_target = GRIPPER_OPEN  # fixed: the grasp centre offset is measured at this opening
             self.holding = False
         elif action == "close":
             self.grip_target = GRIPPER_CLOSED

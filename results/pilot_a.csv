@@ -1,0 +1,2 @@
+trial_id,layout_id,condition,arm,run_order,date,scorer,success,progress,failure_tag,duration_s,tool_calls,api_cost_usd,decision_latency_s,rerun_reason,notes
+dry_01,,E1,A,,2026-11-23,live,0,1,reach,113.7,26,0.5893,4.57,,reached the object but not around it. the stationary finger push the object further from base out of gray zone. Tried to grasp 2-3 times.

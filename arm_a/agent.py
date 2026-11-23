@@ -54,10 +54,9 @@ TOOLS = [
          "x": {"type": "number"}, "y": {"type": "number"}, "height": {"type": "number"},
          "yaw_deg": {"type": "number", "description": "gripper rotation about vertical, default 0"}},
          "required": ["x", "y", "height"]}},
-    {"name": "gripper", "description": "Open or close the gripper. After closing, reports whether something is held.",
+    {"name": "gripper", "description": "Open (fingertips about 80 mm apart) or close the gripper. After closing, reports whether something is held.",
      "input_schema": {"type": "object", "properties": {
-         "action": {"type": "string", "enum": ["open", "close"]},
-         "opening": {"type": "number", "description": "for open: 0-100, default 45"}}, "required": ["action"]}},
+         "action": {"type": "string", "enum": ["open", "close"]}}, "required": ["action"]}},
     {"name": "home", "description": "Move to a safe hover position above the middle of the table.",
      "input_schema": {"type": "object", "properties": {}}},
 ]
@@ -93,6 +92,20 @@ class LiveView:
     def close(self):
         self._stop = True
         self.thread.join(timeout=2)
+
+
+def mark_cache_point(messages):
+    """Prompt caching for the whole conversation: one cache breakpoint on the newest user turn.
+    Every earlier image and tool result is then read from cache at a twentieth of the input price
+    instead of being dropped."""
+    for m in messages:
+        if m["role"] == "user" and isinstance(m["content"], list):
+            for b in m["content"]:
+                if isinstance(b, dict):
+                    b.pop("cache_control", None)
+    last = messages[-1]["content"]
+    if isinstance(last, list) and last and isinstance(last[-1], dict):
+        last[-1]["cache_control"] = {"type": "ephemeral"}
 
 
 def jpeg_b64(img, quality=85):
@@ -165,6 +178,7 @@ def main():
         while True:
             if time.time() - t_start > TIME_LIMIT_S:
                 stop_reason = "time_limit"; break
+            mark_cache_point(messages)
             t0 = time.time()
             resp = client.messages.create(
                 model=MODEL, max_tokens=2048, tools=TOOLS, messages=messages,

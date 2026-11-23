@@ -46,9 +46,27 @@ class Kinematics:
         """Angle between the gripper approach axis and straight down."""
         return float(math.degrees(math.acos(float(np.clip(-T[2, 2], -1.0, 1.0)))))
 
+    def point(self, q_deg, offset_mm=(0.0, 0.0, 0.0)):
+        """World position (mm) of a point given in the fingertip frame."""
+        T = self.fk(q_deg)
+        return T[:3, 3] + T[:3, :3] @ np.asarray(offset_mm, float)
+
+    def ik_point(self, q_start_deg, xyz_mm, yaw_deg=0.0, offset_mm=(0.0, 0.0, 0.0)):
+        """Like ik(), but places a point fixed in the fingertip frame (e.g. the middle of the open jaws)."""
+        offset = np.asarray(offset_mm, float)
+        target = np.asarray(xyz_mm, float)
+        q = np.asarray(q_start_deg, float)
+        for _ in range(4):
+            R = self.fk(q)[:3, :3]
+            q, _err, tilt = self.ik(q, target - R @ offset, yaw_deg)
+            err = float(np.linalg.norm(self.point(q, offset) - target))
+            if err < 1.0:
+                break
+        return q, err, tilt
+
     def ik(self, q_start_deg, xyz_mm, yaw_deg=0.0, tol_mm=1.0):
-        """Returns (q_deg, position_error_mm, tilt_deg). Tries hard to keep the gripper vertical,
-        then relaxes that where the joint limits make vertical impossible at this point."""
+        """Returns (q_deg, position_error_mm, tilt_deg) for the fingertip frame origin. Tries hard to keep
+        the gripper vertical, then relaxes that where the joint limits make vertical impossible here."""
         roll = float(np.clip(ROLL_NEUTRAL_DEG + yaw_deg, -175.0, 175.0))
         results = []
         for w in (1.0, 0.2, 0.05, 0.0):
