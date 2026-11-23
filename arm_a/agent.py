@@ -4,7 +4,7 @@ Usage (arm at rest, leader not needed):
   python -m arm_a.agent --instruction "put the orange cube in the pink bowl" \
       --trial-id pilot_01 --layout-id P01 --condition E1
 
-Needs ANTHROPIC_API_KEY. Writes runs/<trial-id>/: log.jsonl, images, video.mp4, summary.json,
+Credentials: `ant auth login` (no key), or ANTHROPIC_API_KEY in the environment or ~/.config/who-moves-the-arm/.env. Writes runs/<trial-id>/: log.jsonl, images, video.mp4, summary.json,
 and appends one row to the results CSV after you score the trial.
 """
 from __future__ import annotations
@@ -27,6 +27,18 @@ PRICE_PER_MTOK = {"input": 4.0, "output": 20.0, "cache_read": 0.20, "cache_write
 TIME_LIMIT_S = 120.0
 MAX_TOOL_CALLS = 25
 HERE = Path(__file__).parent
+KEY_FILE = Path.home() / ".config" / "who-moves-the-arm" / ".env"  # outside the repo, never committed
+
+
+def load_key_file(path=KEY_FILE):
+    """Fill missing environment variables from KEY=value lines in a local file."""
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 TOOLS = [
     {"name": "look", "description": "Both camera images (scene, wrist) and the arm state.",
@@ -85,6 +97,7 @@ def main():
         logf.flush()
 
     system = open(args.prompt).read()
+    load_key_file()  # an API key here or in the environment wins; otherwise the SDK uses the `ant auth login` profile
     client = anthropic.Anthropic()
     rig = Rig(args.urdf, args.calib)
     rec = Recorder(str(out / "video.mp4"), rig.scene, rig.wrist)
