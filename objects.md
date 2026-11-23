@@ -20,15 +20,19 @@ Fixed on 23 Nov 2026, before the first demonstration. One piece of each is used;
 
 ## Containers
 
+Changed on 23 Nov 2026, before any demonstration or scored trial (see PREREG.md, Deviations).
+
 | id | Name in instructions | Description |
 |---|---|---|
-| pink_bowl | the pink bowl | Pink bowl |
-| green_bowl | the green bowl | Sage-green bowl |
+| pink_cup | the pink cup | Pale pink tumbler: opening 6.8 cm, inside depth 5.5 cm, height 6.1 cm |
+| white_cup | the white cup | Cream espresso cup with an orange base and a handle: opening 6.3 cm, inside depth 4.2 cm, height 4.8 cm; handle turned away from the arm |
+
+Dropped: pink bowl and sage-green bowl (11 cm across, 7.6 cm tall).
 
 ## Instruction template
 
-`put the {object} in the {container}`: 3 training objects x 2 containers = 6 training instructions. Wording is fixed and not paraphrased.
+`put the {object} in the {container}`: 3 training objects x 2 containers = 6 training instructions, e.g. "put the orange cube in the white cup". Wording is fixed and not paraphrased. The white cup is never called orange.
 
 ## Not used
 
-Pink cylinders (same colour as the pink bowl) and peach triangles (low contrast on the white table).
+Pink cylinders (close in colour to the pink cup) and peach triangles (low contrast on the white table).

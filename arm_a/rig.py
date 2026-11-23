@@ -32,9 +32,11 @@ STEP_MM = 10.0               # Cartesian waypoint spacing
 JOINT_SPEED_DEG_S = 60.0
 CONTROL_HZ = 30
 
-BOWL_HEIGHT_MM = 76.0        # bowls are 7.6 cm tall
-TRAVEL_H_EMPTY = 125.0       # same as holding: when tilted over a bowl the open jaw hangs ~2 cm below the centre (23 Nov)
-TRAVEL_H_HOLDING = 125.0     # a held piece hangs up to ~15 mm below the fingertips: ~3 cm clearance
+CONTAINER_HEIGHT_MM = 61.0   # tallest container: pink cup 6.1 cm (white cup 4.8 cm); bowls (7.6 cm) dropped 23 Nov
+# Travel height keeps the clearance used with the bowls (~5 cm over the rim): a held piece hangs ~15 mm below
+# the grasp centre, and when the gripper tilts the open moving jaw hangs ~2 cm lower still.
+TRAVEL_H_EMPTY = 110.0
+TRAVEL_H_HOLDING = 110.0
 LONG_MOVE_MM = 30.0          # horizontal moves longer than this go up, across, then down
 
 # The URDF fingertip frame sits on the FIXED finger; the moving jaw opens along the frame's -x axis.
