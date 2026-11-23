@@ -1,0 +1,17 @@
+trial_id,layout_id,condition,arm,run_order,date,scorer,success,progress,failure_tag,duration_s,tool_calls,api_cost_usd,decision_latency_s,rerun_reason,notes
+dry_01,,E1,A,,2026-11-23,live,0,1,reach,113.7,26,0.5893,4.57,,reached the object but not around it. the stationary finger push the object further from base out of gray zone. Tried to grasp 2-3 times.
+dry_02,,E1,A,,2026-11-23,live,1,4,,50.3,16,0.0827,1.89,,the motion is slightly jittery and upon return the fingers of the gripper collided with the bowl
+dry_03,,E1,A,,2026-11-23,live,1,4,,67.6,16,0.0985,3.3,,had to realign the reach for grasp a few times however it did grasp in one attempt.
+dry_04,,E1,A,,2026-11-23,live,1,4,,44.8,11,0.057,2.32,,
+dry_05,,E1,A,,2026-11-23,live,1,4,grasp,95.9,22,0.1573,4.13,,couldn't grasp the D in first attempt. Had to realign and grasp it.
+pilot_01,,E1,A,,2026-11-23,live,0,3,grasp,120.9,26,0.1731,4.26,,first it couldn't grasp in one attempt. second it arrived at the edge of the pink tumbler but did NOT release the cube. Brought the cube back to home pose with it.
+pilot_02,,E1,A,,2026-11-23,live,1,4,,44.9,12,0.0634,2.46,,dropped the b in from the edge instead of aligning to center of the cup
+pilot_03,,E1,A,,2026-11-23,live,0,3,release,108.2,26,0.1755,4.89,,got only to the edge of the pink tumbler and the D fell outside it instead of inside it. Then tried again to pick up the D but I think the time or the number of calls got over.
+pilot_04,,E1,A,,2026-11-23,live,0,0,,12.9,2,0.0169,2.05,,didn't try anything.
+pilot_04b,,E1,A,,2026-11-23,live,0,3,release,123.0,23,0.1606,5.64,,"got the cube to the edge of the cup and then instead of hovering above the cube, it got to the cubes edge and slight pushed the cube further with the cube. When it released, the cube fell outside."
+pilot_05,,E1,A,,2026-11-23,live,0,3,release,119.8,26,0.1833,4.47,,"first fumbled with the grasp, recovered in second attempt. Carried the B to the mug. Did NOT release. Carried the B back to home pose."
+pilot_06,,E1,A,,2026-11-24,live,0,3,release,66.2,13,0.0853,4.67,,"I picked up the green D, but it slipped out of the gripper on the way to the mug. It landed near the far left edge of the table, about 645 mm from the arm's base, well beyond its 360 mm reach. The D is not in the mug and I can't get it back."""
+pilot_07,,E1,A,,2026-11-24,live,1,4,,71.1,16,0.0946,4.13,,
+pilot_08,,E1,A,,2026-11-24,live,1,4,,119.1,25,0.1726,4.94,,failed to grip at first attempt. Recoved in the second attempt.
+pilot_09,,E1,A,,2026-11-24,live,0,releasae,release,115.0,26,0.1598,4.23,,reached the mug but release at the edge. D felt outside. Couldn't pick it up again in time.
+pilot_10,,E1,A,,2026-11-24,live,0,3,release,121.6,21,0.155,6.14,,tried to release it at the edge but when actually opene the grasp the cube fell outside.
