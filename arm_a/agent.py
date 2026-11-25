@@ -130,7 +130,7 @@ def main():
     ap.add_argument("--condition", default="")
     ap.add_argument("--run-order", default="")
     ap.add_argument("--urdf", default=os.path.expanduser("~/SO-ARM100/Simulation/SO101/so101_new_calib.urdf"))
-    ap.add_argument("--calib", default="calib/touch_calib_v2.json")
+    ap.add_argument("--calib", default="calib/touch_calib_v3_fit.json")
     ap.add_argument("--prompt", default=str(HERE / "system_prompt_v1.md"))
     ap.add_argument("--results", default="results/pilot_a.csv")
     ap.add_argument("--no-viewer", action="store_true", help="skip the live Rerun window")

@@ -41,7 +41,7 @@ LONG_MOVE_MM = 30.0          # horizontal moves longer than this go up, across, 
 
 # The URDF fingertip frame sits on the FIXED finger; the moving jaw opens along the frame's -x axis.
 # All positions the agent sees and sends are the point midway between the open jaws (grasp centre).
-OPEN_GAP_MM = 80.0           # gap between the fingertips at GRIPPER_OPEN, measured 23 Nov with taped fingers
+OPEN_GAP_MM = 86.0           # gap between the fingertips at GRIPPER_OPEN: 80 measured 23 Nov in the air; 86 measured 26 Nov with the tips resting on the table
 GRASP_OFFSET_MM = (-OPEN_GAP_MM / 2.0, 0.0, 0.0)
 
 GRIPPER_OPEN = 45.0          # 0 = closed, 100 = fully open (LeRobot RANGE_0_100)
