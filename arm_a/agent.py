@@ -27,7 +27,10 @@ from arm_a.rig import Recorder, Rig
 MODEL = "claude-opus-5-5"
 PRICE_PER_MTOK = {"input": 4.0, "output": 20.0, "cache_read": 0.20, "cache_write": 5.0}
 TIME_LIMIT_S = 120.0
-MAX_TOOL_CALLS = 25
+REPORT_REQUEST = ("The trial is over. Report in this form, without calling any tools:\n"
+                  "success: yes or no\n"
+                  "failed_step: the first step that failed (perception / reach / grasp / transport / release / freeze), or none\n"
+                  "notes: one or two sentences on what happened")
 HERE = Path(__file__).parent
 KEY_FILE = Path.home() / ".config" / "who-moves-the-arm" / ".env"  # outside the repo, never committed
 
@@ -49,12 +52,12 @@ TOOLS = [
      "input_schema": {"type": "object", "properties": {
          "u": {"type": "number", "description": "pixel column, 0-639"},
          "v": {"type": "number", "description": "pixel row, 0-479"}}, "required": ["u", "v"]}},
-    {"name": "move_to", "description": "Move the fingertip in a straight line to (x, y, height) mm, height above the table.",
+    {"name": "move_to", "description": "Move the point midway between the open fingertips to (x, y, height) mm, height above the table.",
      "input_schema": {"type": "object", "properties": {
          "x": {"type": "number"}, "y": {"type": "number"}, "height": {"type": "number"},
          "yaw_deg": {"type": "number", "description": "gripper rotation about vertical, default 0"}},
          "required": ["x", "y", "height"]}},
-    {"name": "gripper", "description": "Open (fingertips about 80 mm apart) or close the gripper. After closing, reports whether something is held.",
+    {"name": "gripper", "description": "Open (fingertips about 86 mm apart) or close the gripper. After closing, reports whether something is held.",
      "input_schema": {"type": "object", "properties": {
          "action": {"type": "string", "enum": ["open", "close"]}}, "required": ["action"]}},
     {"name": "home", "description": "Move to a safe hover position above the middle of the table.",
@@ -131,8 +134,8 @@ def main():
     ap.add_argument("--run-order", default="")
     ap.add_argument("--urdf", default=os.path.expanduser("~/SO-ARM100/Simulation/SO101/so101_new_calib.urdf"))
     ap.add_argument("--calib", default="calib/touch_calib_v3_fit.json")
-    ap.add_argument("--prompt", default=str(HERE / "system_prompt_v1.md"))
-    ap.add_argument("--results", default="results/pilot_a.csv")
+    ap.add_argument("--prompt", default=str(HERE / "system_prompt_v2.md"))
+    ap.add_argument("--results", default="results/pilot2_a.csv")
     ap.add_argument("--no-viewer", action="store_true", help="skip the live Rerun window")
     args = ap.parse_args()
 
@@ -201,8 +204,6 @@ def main():
             results = []
             for c in calls:
                 n_calls += 1
-                if n_calls > MAX_TOOL_CALLS:
-                    stop_reason = "call_limit"; break
                 t1 = time.time()
                 if c.name == "look":
                     scene, wrist, state = rig.look()
@@ -222,13 +223,12 @@ def main():
                 if view:
                     view.note(line)
                 results.append({"type": "tool_result", "tool_use_id": c.id, "content": content})
-            if stop_reason == "call_limit":
-                break
             messages.append({"role": "user", "content": results})
     finally:
         duration = time.time() - t_start if "t_start" in locals() else 0.0
         try:
             rig.home()
+            rig.gripper("open")  # never leave the gripper clamped on a piece while the arm parks
         finally:
             rec.close()
             if view:
@@ -236,13 +236,39 @@ def main():
                 view.close()
             rig.close()
 
+    report = ""
+    if "messages" in locals() and messages:
+        try:
+            if messages[-1]["role"] == "user":
+                messages[-1]["content"].append({"type": "text", "text": REPORT_REQUEST})
+            else:
+                messages.append({"role": "user", "content": REPORT_REQUEST})
+            resp = client.messages.create(
+                model=MODEL, max_tokens=300, tools=TOOLS, tool_choice={"type": "none"}, messages=messages,
+                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}])
+            u = resp.usage
+            usage["input"] += u.input_tokens; usage["output"] += u.output_tokens
+            usage["cache_read"] += getattr(u, "cache_read_input_tokens", 0) or 0
+            usage["cache_write"] += getattr(u, "cache_creation_input_tokens", 0) or 0
+            report = " ".join(b.text for b in resp.content if b.type == "text").strip()
+        except Exception as e:  # the report is extra data; a failure here must not lose the trial
+            report = f"(no report: {type(e).__name__}: {e})"
+    self_report = {k: "" for k in ("success", "failed_step", "notes")}
+    for line in report.splitlines():
+        k, _, v = line.partition(":")
+        if k.strip().lower() in self_report:
+            self_report[k.strip().lower()] = v.strip()
+    log("report", text=report, parsed=self_report)
+
     summary = {"trial_id": args.trial_id, "instruction": args.instruction, "stop_reason": stop_reason,
                "duration_s": round(duration, 1), "tool_calls": n_calls, "usage": usage,
                "api_cost_usd": round(cost_usd(usage), 4),
                "mean_decision_latency_s": round(sum(api_latency) / max(1, len(api_latency)), 2),
-               "final_text": final_text}
+               "final_text": final_text, "self_report": self_report, "self_report_text": report}
     json.dump(summary, open(out / "summary.json", "w"), indent=2)
-    print(json.dumps(summary, indent=2))
+    # the arm's own claims are shown only after you score, so they cannot sway the score
+    print(json.dumps({k: v for k, v in summary.items() if k not in ("final_text", "self_report", "self_report_text")},
+                     indent=2))
 
     print("""
 Score this trial (see SCORING.md):
@@ -258,16 +284,24 @@ Score this trial (see SCORING.md):
     path = Path(args.results)
     path.parent.mkdir(parents=True, exist_ok=True)
     new = not path.exists()
+    header = ["trial_id", "layout_id", "condition", "arm", "run_order", "date", "scorer", "success",
+              "progress", "failure_tag", "duration_s", "tool_calls", "api_cost_usd",
+              "decision_latency_s", "rerun_reason", "notes", "self_success", "self_failed_step"]
+    if not new:
+        with open(path) as f:
+            header = next(csv.reader(f))
+    row = [args.trial_id, args.layout_id, args.condition, "A", args.run_order, time.strftime("%Y-%m-%d"),
+           "live", success, progress, tag, summary["duration_s"], n_calls, summary["api_cost_usd"],
+           summary["mean_decision_latency_s"], "", notes, self_report["success"], self_report["failed_step"]]
     with open(path, "a", newline="") as f:
         w = csv.writer(f)
         if new:
-            w.writerow(["trial_id", "layout_id", "condition", "arm", "run_order", "date", "scorer", "success",
-                        "progress", "failure_tag", "duration_s", "tool_calls", "api_cost_usd",
-                        "decision_latency_s", "rerun_reason", "notes"])
-        w.writerow([args.trial_id, args.layout_id, args.condition, "A", args.run_order, time.strftime("%Y-%m-%d"),
-                    "live", success, progress, tag, summary["duration_s"], n_calls, summary["api_cost_usd"],
-                    summary["mean_decision_latency_s"], "", notes])
+            w.writerow(header)
+        w.writerow(row[:len(header)])
     log("scored", success=success, progress=progress, failure_tag=tag, notes=notes)
+    print(f"\nArm A's own report (after your score):\n  {report or '(none)'}")
+    if final_text:
+        print(f"  its last message: {final_text}")
     print(f"saved {out} and a row in {path}")
 
 
