@@ -1,0 +1,6 @@
+episode_index,layout_id,reason
+27,D-28,"streaming encoder dropped video frames (scene 1, wrist 2); delete and re-record"
+30,D-31,"streaming encoder dropped video frames (scene 1); delete and re-record"
+31,D-32,"streaming encoder dropped video frames (wrist 1); delete and re-record"
+32,D-33,"streaming encoder dropped video frames (scene 1, wrist 2); delete and re-record"
+36,D-37,"streaming encoder dropped video frames (scene 3); delete and re-record"

@@ -1,0 +1,81 @@
+episode_index,layout_id,condition,instruction,frames,source
+0,D-01,D0,put the blue B in the mug,864,ankurcw/wmta_demos_v1 episode 0
+1,D-02,D0,put the orange cube in the pink tumbler,753,ankurcw/wmta_demos_v1 episode 1
+2,D-03,D0,put the orange cube in the mug,714,ankurcw/wmta_demos_v1 episode 2
+3,D-04,D1,put the orange cube in the mug,624,ankurcw/wmta_demos_v1 episode 3
+4,D-05,D1,put the blue B in the mug,717,ankurcw/wmta_demos_v1 episode 4
+5,D-06,D0,put the green D in the mug,540,ankurcw/wmta_demos_v1 episode 5
+6,D-07,D2,put the green D in the mug,516,ankurcw/wmta_demos_v1 episode 6
+7,D-08,D0,put the blue B in the pink tumbler,570,ankurcw/wmta_demos_v1 episode 7
+8,D-09,D0,put the orange cube in the pink tumbler,381,ankurcw/wmta_demos_v1 episode 8
+9,D-10,D0,put the blue B in the pink tumbler,402,ankurcw/wmta_demos_v1 episode 9
+10,D-11,D2,put the blue B in the pink tumbler,522,ankurcw/wmta_demos_v1 episode 10
+11,D-12,D2,put the orange cube in the mug,495,ankurcw/wmta_demos_v1 episode 11
+12,D-13,D1,put the green D in the pink tumbler,435,ankurcw/wmta_demos_v1 episode 12
+13,D-14,D0,put the blue B in the pink tumbler,426,ankurcw/wmta_demos_v1 episode 13
+14,D-15,D0,put the green D in the mug,507,ankurcw/wmta_demos_v1 episode 14
+15,D-16,D0,put the green D in the mug,450,ankurcw/wmta_demos_v1 episode 15
+16,D-17,D0,put the orange cube in the pink tumbler,339,ankurcw/wmta_demos_v1 episode 16
+17,D-18,D1,put the green D in the pink tumbler,411,ankurcw/wmta_demos_v1 episode 17
+18,D-19,D1,put the blue B in the pink tumbler,405,ankurcw/wmta_demos_v1 episode 18
+19,D-20,D2,put the green D in the mug,447,ankurcw/wmta_demos_v1 episode 19
+20,D-21,D1,put the blue B in the pink tumbler,405,ankurcw/wmta_demos_v1 episode 20
+21,D-22,D0,put the orange cube in the pink tumbler,399,ankurcw/wmta_demos_v1 episode 21
+22,D-23,D0,put the orange cube in the mug,426,ankurcw/wmta_demos_v1 episode 22
+23,D-24,D0,put the blue B in the mug,327,ankurcw/wmta_demos_v1 episode 23
+24,D-25,D0,put the blue B in the mug,459,ankurcw/wmta_demos_v1 episode 24
+25,D-26,D2,put the green D in the pink tumbler,378,ankurcw/wmta_demos_v1 episode 25
+26,D-27,D1,put the orange cube in the pink tumbler,360,ankurcw/wmta_demos_v1 episode 26
+27,D-28,D2,put the green D in the pink tumbler,414,ankurcw/wmta_demos_v1_redo episode 0
+28,D-29,D0,put the green D in the pink tumbler,423,ankurcw/wmta_demos_v1 episode 28
+29,D-30,D0,put the orange cube in the mug,438,ankurcw/wmta_demos_v1 episode 29
+30,D-31,D2,put the green D in the mug,489,ankurcw/wmta_demos_v1_redo episode 1
+31,D-32,D0,put the orange cube in the mug,483,ankurcw/wmta_demos_v1_redo episode 2
+32,D-33,D0,put the blue B in the pink tumbler,408,ankurcw/wmta_demos_v1_redo episode 3
+33,D-34,D0,put the green D in the pink tumbler,507,ankurcw/wmta_demos_v1 episode 33
+34,D-35,D0,put the orange cube in the pink tumbler,393,ankurcw/wmta_demos_v1 episode 34
+35,D-36,D2,put the orange cube in the pink tumbler,381,ankurcw/wmta_demos_v1 episode 35
+36,D-37,D1,put the blue B in the mug,474,ankurcw/wmta_demos_v1_redo episode 4
+37,D-38,D0,put the orange cube in the mug,396,ankurcw/wmta_demos_v1 episode 37
+38,D-39,D1,put the green D in the mug,381,ankurcw/wmta_demos_v1 episode 38
+39,D-40,D0,put the green D in the pink tumbler,438,ankurcw/wmta_demos_v1 episode 39
+40,D-41,D0,put the blue B in the pink tumbler,408,ankurcw/wmta_demos_v1 episode 40
+41,D-42,D0,put the green D in the pink tumbler,384,ankurcw/wmta_demos_v1 episode 41
+42,D-43,D1,put the blue B in the mug,438,ankurcw/wmta_demos_v1 episode 42
+43,D-44,D2,put the blue B in the mug,558,ankurcw/wmta_demos_v1 episode 43
+44,D-45,D1,put the green D in the mug,381,ankurcw/wmta_demos_v1 episode 44
+45,D-46,D0,put the blue B in the pink tumbler,387,ankurcw/wmta_demos_v1 episode 45
+46,D-47,D0,put the green D in the pink tumbler,372,ankurcw/wmta_demos_v1 episode 46
+47,D-48,D0,put the blue B in the mug,357,ankurcw/wmta_demos_v1 episode 47
+48,D-49,D1,put the orange cube in the mug,351,ankurcw/wmta_demos_v1 episode 48
+49,D-50,D0,put the orange cube in the mug,372,ankurcw/wmta_demos_v1 episode 49
+50,D-51,D0,put the blue B in the mug,447,ankurcw/wmta_demos_v1 episode 50
+51,D-52,D0,put the orange cube in the pink tumbler,381,ankurcw/wmta_demos_v1 episode 51
+52,D-53,D0,put the green D in the mug,456,ankurcw/wmta_demos_v1 episode 52
+53,D-54,D1,put the blue B in the pink tumbler,429,ankurcw/wmta_demos_v1 episode 53
+54,D-55,D2,put the blue B in the mug,435,ankurcw/wmta_demos_v1 episode 54
+55,D-56,D1,put the orange cube in the pink tumbler,366,ankurcw/wmta_demos_v1 episode 55
+56,D-57,D2,put the blue B in the pink tumbler,384,ankurcw/wmta_demos_v1 episode 56
+57,D-58,D1,put the orange cube in the mug,342,ankurcw/wmta_demos_v1 episode 57
+58,D-59,D0,put the orange cube in the mug,375,ankurcw/wmta_demos_v1 episode 58
+59,D-60,D0,put the green D in the mug,393,ankurcw/wmta_demos_v1 episode 59
+60,D-61,D0,put the green D in the pink tumbler,465,ankurcw/wmta_demos_v1 episode 60
+61,D-62,D2,put the orange cube in the pink tumbler,402,ankurcw/wmta_demos_v1 episode 61
+62,D-63,D2,put the orange cube in the pink tumbler,408,ankurcw/wmta_demos_v1 episode 62
+63,D-64,D0,put the orange cube in the pink tumbler,393,ankurcw/wmta_demos_v1 episode 63
+64,D-65,D1,put the green D in the pink tumbler,387,ankurcw/wmta_demos_v1 episode 64
+65,D-66,D0,put the blue B in the pink tumbler,444,ankurcw/wmta_demos_v1 episode 65
+66,D-67,D1,put the blue B in the mug,447,ankurcw/wmta_demos_v1 episode 66
+67,D-68,D0,put the green D in the mug,426,ankurcw/wmta_demos_v1 episode 67
+68,D-69,D2,put the orange cube in the mug,435,ankurcw/wmta_demos_v1 episode 68
+69,D-70,D2,put the orange cube in the mug,474,ankurcw/wmta_demos_v1 episode 69
+70,D-71,D1,put the green D in the mug,378,ankurcw/wmta_demos_v1 episode 70
+71,D-72,D0,put the green D in the mug,360,ankurcw/wmta_demos_v1 episode 71
+72,D-73,D1,put the orange cube in the pink tumbler,399,ankurcw/wmta_demos_v1 episode 72
+73,D-74,D2,put the blue B in the mug,486,ankurcw/wmta_demos_v1 episode 73
+74,D-75,D1,put the blue B in the pink tumbler,408,ankurcw/wmta_demos_v1 episode 74
+75,D-76,D2,put the blue B in the mug,420,ankurcw/wmta_demos_v1 episode 75
+76,D-77,D2,put the green D in the pink tumbler,417,ankurcw/wmta_demos_v1 episode 76
+77,D-78,D2,put the blue B in the pink tumbler,378,ankurcw/wmta_demos_v1 episode 77
+78,D-79,D2,put the orange cube in the pink tumbler,417,ankurcw/wmta_demos_v1 episode 78
+79,D-80,D0,put the blue B in the mug,468,ankurcw/wmta_demos_v1 episode 79
