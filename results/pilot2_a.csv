@@ -1,0 +1,4 @@
+trial_id,layout_id,condition,arm,run_order,date,scorer,success,progress,failure_tag,duration_s,tool_calls,api_cost_usd,decision_latency_s,rerun_reason,notes,self_success,self_failed_step
+pilot2_01,,E1,A,,2026-11-26,live,1,4,none,76.9,17,0.1247,3.85,VOID: calibration v3_fit was wrong near the base (26 Nov); pilot 2 replaced by pilot 3,,yes,none
+pilot2_02,,E1,A,,2026-11-26,live,0,1,"reach, grasp",107.9,32,0.2143,2.98,VOID: calibration v3_fit was wrong near the base (26 Nov); pilot 2 replaced by pilot 3,kept failing to grasp the B. It kept slipping out.,no,grasp
+pilot2_03,,E1,A,,2026-11-26,live,0,1,reach and grasp,121.0,39,0.2574,3.49,VOID: calibration v3_fit was wrong near the base (26 Nov); pilot 2 replaced by pilot 3,tried to close on D multiple times and failed.,no,grasp

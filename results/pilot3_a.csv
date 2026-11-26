@@ -1,0 +1,11 @@
+trial_id,layout_id,condition,arm,run_order,date,scorer,success,progress,failure_tag,duration_s,tool_calls,api_cost_usd,decision_latency_s,rerun_reason,notes,self_success,self_failed_step
+pilot3_02,,E1,A,,2026-11-26,live,0,3,release,124.1,30,0.2127,3.42,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],no,release
+pilot3_03,,E1,A,,2026-11-26,live,0,3,release,95.6,22,0.1783,3.56,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],no,release
+pilot3_05,,E1,A,,2026-11-26,live,1,4,none,109.8,26,0.2246,3.96,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],yes,grasp
+pilot3_06,,E1,A,,2026-11-26,live,0,3,transport,123.3,34,0.2062,2.97,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],no,transport
+pilot3_07,,E1,A,,2026-11-26,live,0,3,release,114.6,29,0.2628,4.35,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],no,release
+pilot3_08,,E1,A,,2026-11-26,live,1,4,none,70.1,16,0.1042,2.83,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],yes,none
+pilot3_09,,E1,A,,2026-11-26,live,1,4,none,70.7,20,0.1412,3.24,,[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],yes,none
+pilot3_10c,,E1,A,,2026-11-26,live,1,4,none,111.0,30,0.2323,3.06,rerun of pilot3_10 (crashed: agent.py bug) and pilot3_10b (motor 2 did not answer at connect),[scored 26 Nov from arm A's report and the log; the scorer watched live and confirmed arm A's success claims],yes,grasp
+pilot3_01,,E1,A,,2026-11-26,live,1,4,none,95.8,31,0.2213,2.96,,,yes,grasp
+pilot3_04b,,E1,A,,2026-11-26,live,0,3,release,124.8,28,0.1917,3.28,rerun of pilot3_04 (crashed: agent.py bug),the cube kinda stuck to the moving finger and then dropped after a delay,no,release

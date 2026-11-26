@@ -63,6 +63,44 @@ TOOLS = [
     {"name": "home", "description": "Move to a safe hover position above the middle of the table.",
      "input_schema": {"type": "object", "properties": {}}},
 ]
+RUN_PYTHON_TOOL = {
+    "name": "run_python",
+    "description": "Run Python code on the computer attached to the arm. Variables persist between calls. "
+                   "Returns what the code prints, and any images passed to show(image, label).",
+    "input_schema": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]}}
+
+
+class CodeRunner:
+    """Runs arm A's own Python inside the trial, with the rig in scope. The trial's time limit applies."""
+
+    def __init__(self, rig):
+        import numpy as np
+        self.images = []
+        self.ns = {"rig": rig, "np": np, "cv2": cv2, "time": time, "show": self._show}
+
+    def _show(self, img, label=""):
+        self.images.append((str(label), img))
+
+    def run(self, code, seconds_left):
+        import contextlib, io, signal, traceback
+
+        def on_alarm(*_):
+            raise TimeoutError("the trial's time limit was reached while the code was running")
+
+        self.images, buf = [], io.StringIO()
+        old = signal.signal(signal.SIGALRM, on_alarm)
+        signal.alarm(max(1, int(seconds_left)))
+        try:
+            with contextlib.redirect_stdout(buf):
+                exec(compile(code, "<arm_a>", "exec"), self.ns)
+        except BaseException:  # report the error to arm A; the trial goes on
+            buf.write(traceback.format_exc(limit=3))
+        finally:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old)
+        out = buf.getvalue()
+        return (out[:4000] + ("\n...(output cut at 4000 characters)" if len(out) > 4000 else "")), self.images[:4]
+
 
 
 class LiveView:
@@ -133,10 +171,11 @@ def main():
     ap.add_argument("--condition", default="")
     ap.add_argument("--run-order", default="")
     ap.add_argument("--urdf", default=os.path.expanduser("~/SO-ARM100/Simulation/SO101/so101_new_calib.urdf"))
-    ap.add_argument("--calib", default="calib/touch_calib_v3_fit.json")
-    ap.add_argument("--prompt", default=str(HERE / "system_prompt_v2.md"))
+    ap.add_argument("--calib", default="calib/touch_calib_v2.json")
+    ap.add_argument("--prompt", default=str(HERE / "system_prompt_v4_code.md"))
     ap.add_argument("--results", default="results/pilot2_a.csv")
     ap.add_argument("--no-viewer", action="store_true", help="skip the live Rerun window")
+    ap.add_argument("--no-code", dest="code", action="store_false", help="leave out the run_python tool (development only)")
     args = ap.parse_args()
 
     out = Path("runs") / args.trial_id
@@ -177,6 +216,8 @@ def main():
             image_block(scene), image_block(wrist)]}]
         log("start", instruction=args.instruction, model=MODEL, prompt=args.prompt, state=state)
         t_start = time.time()
+        runner = CodeRunner(rig) if args.code else None
+        tools = TOOLS + ([RUN_PYTHON_TOOL] if args.code else [])
 
         while True:
             if time.time() - t_start > TIME_LIMIT_S:
@@ -184,7 +225,7 @@ def main():
             mark_cache_point(messages)
             t0 = time.time()
             resp = client.messages.create(
-                model=MODEL, max_tokens=2048, tools=TOOLS, messages=messages,
+                model=MODEL, max_tokens=4096 if args.code else 2048, tools=tools, messages=messages,
                 system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}])
             api_latency.append(time.time() - t0)
             u = resp.usage
@@ -205,7 +246,15 @@ def main():
             for c in calls:
                 n_calls += 1
                 t1 = time.time()
-                if c.name == "look":
+                if c.name == "run_python" and runner:
+                    code_out, imgs = runner.run(c.input.get("code", ""), TIME_LIMIT_S - (time.time() - t_start))
+                    for lbl, im in imgs:
+                        save(im, "code")
+                    content = [{"type": "text", "text": code_out or "(no output)"}]
+                    for lbl, im in imgs:
+                        content += [{"type": "text", "text": f"image: {lbl}"}, image_block(im)]
+                    logged = {"code": c.input.get("code", ""), "output": code_out, "images": [l for l, _ in imgs]}
+                elif c.name == "look":
                     scene, wrist, state = rig.look()
                     save(scene, "scene"); save(wrist, "wrist")
                     content = [{"type": "text", "text": json.dumps(state) + "\nScene image, then wrist image:"},
@@ -244,7 +293,7 @@ def main():
             else:
                 messages.append({"role": "user", "content": REPORT_REQUEST})
             resp = client.messages.create(
-                model=MODEL, max_tokens=300, tools=TOOLS, tool_choice={"type": "none"}, messages=messages,
+                model=MODEL, max_tokens=300, tools=locals().get("tools", TOOLS), tool_choice={"type": "none"}, messages=messages,
                 system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}])
             u = resp.usage
             usage["input"] += u.input_tokens; usage["output"] += u.output_tokens

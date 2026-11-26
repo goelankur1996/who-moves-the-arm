@@ -1,0 +1,19 @@
+trial_id,layout_id,condition,arm,run_order,date,scorer,success,progress,failure_tag,duration_s,tool_calls,api_cost_usd,decision_latency_s,rerun_reason,notes,self_success,self_failed_step
+dev_pin_02,,E1,A,,2026-11-26,live,0,1,reach,124.7,36,0.2251,3.22,,away from the object,no,grasp
+dev_pin_03,,E1,A,,2026-11-26,live,1,4,none,95.5,26,0.1623,3.33,,had to retry grasp.,yes,grasp
+dev_pin_05,,E1,A,,2026-11-26,live,0,1,grasp,131.7,39,0.2434,3.41,,,no,grasp
+dev_pin2_02,,E1,A,,2026-11-26,live,0,0,0,124.7,32,0.211,3.64,,,no,grasp
+dev_pin3_02,,E1,A,,2026-11-26,live,1,4,,100.4,33,0.2209,3.43,,,yes,grasp
+dev_pin4_03,,E1,A,,2026-11-26,live,0,1,,122.9,33,0.2163,3.87,,,no,grasp
+dev_pin4_01,,E1,A,,2026-11-26,live,0,0,0,108.7,28,0.2122,3.97,,0,no,grasp
+dev_pin5_01,,E1,A,,2026-11-26,live,0,3,,136.7,34,0.2774,4.37,,,no,transport
+dev_v2p1_01,,E1,A,,2026-11-26,live,0,1,grasp,86.5,27,0.2,3.19,,,no,grasp
+dev_v2p1_02,,E1,A,,2026-11-26,live,0,3,release,128.0,23,0.2337,6.04,,,no,release
+dev_v2p2_01,,E1,A,,2026-11-26,live,0,1,,125.1,40,0.2709,2.73,,,no,grasp
+dev_v2p2_02,,E1,A,,2026-11-26,live,1,4,none,75.7,20,0.1383,3.65,,"[corrected 26 Nov by the scorer: first entered as success 0, progress 3 by mistake; the D ended inside the tumbler]",yes,none
+dev_v2p2_03,,E1,A,,2026-11-26,live,1,4,none,84.2,24,0.1613,3.07,,slipped first. Then succeeded.,yes,grasp
+dev_v2p2_04,,E1,A,,2026-11-26,live,1,4,none,83.3,22,0.1381,2.5,,,yes,none
+dev_v2p2_05,,E1,A,,2026-11-26,live,0,1,grasp,102.5,27,0.2144,4.09,,,no,grasp
+dev_v2p2_06,,E1,A,,2026-11-26,live,0,3,release,133.7,34,0.2152,3.63,,"failed to pick up a bunch of times. And when succeeded, ran out of time for the drop. Although it did align it over the tumbler so that would have worked",no,release
+dev_v2p2_07,,E1,A,,2026-11-26,live,0,3,release,76.6,19,0.1156,2.72,,D slipped far away.,no,transport
+dev_code_01,,E1,A,,2026-11-26,live,0,3,transport,123.7,33,0.257,3.58,,didn't reach the tumbler properly and release,no,transport

@@ -1,0 +1,17 @@
+{
+  "saved": "2026-11-26 04:40:18",
+  "joint_names": [
+    "shoulder_pan",
+    "shoulder_lift",
+    "elbow_flex",
+    "wrist_flex",
+    "wrist_roll"
+  ],
+  "joints_deg": [
+    -13.9,
+    -103.0,
+    97.0,
+    72.3,
+    -86.4
+  ]
+}

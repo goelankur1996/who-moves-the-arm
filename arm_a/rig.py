@@ -46,12 +46,24 @@ GRASP_OFFSET_MM = (-OPEN_GAP_MM / 2.0, 0.0, 0.0)
 
 GRIPPER_OPEN = 45.0          # 0 = closed, 100 = fully open (LeRobot RANGE_0_100)
 GRIPPER_CLOSED = 0.0
+# The 0-100 reading is reported to arm A as an approximate gap between the fingertips in mm:
+# 0.9 reads fully closed, 44.7 (the trial opening) measured 86 mm on 26 Nov. Linear in between.
+GAP_CLOSED_READING, GAP_OPEN_READING, GAP_OPEN_MM = 0.9, 44.7, 86.0
+
+
+def gap_mm(reading):
+    return max(0.0, (reading - GAP_CLOSED_READING) / (GAP_OPEN_READING - GAP_CLOSED_READING) * GAP_OPEN_MM)
+
+
 HOLD_THRESHOLD = 5.0         # closed gripper reading: 0.9 empty, 14.5 on the orange cube (23 Nov, taped fingers)
 # Per-step limit on how far a goal may be from the present position. The arm joints keep LeRobot's 10;
 # the gripper gets no practical limit, because squeeze force comes from the gap between goal and position,
 # and a limit of 10 capped that gap (and the grip) on 23 Nov.
 MAX_STEP = {"shoulder_pan": 10.0, "shoulder_lift": 10.0, "elbow_flex": 10.0, "wrist_flex": 10.0,
             "wrist_roll": 10.0, "gripper": 100.0}
+
+REST_FILE = "calib/rest_pose.json"  # the folded rest pose, saved once with: python -m arm_a.save_rest
+REST_TOLERANCE_DEG = 10.0            # a run starts only if every arm joint is this close to the saved rest pose
 
 logging.getLogger().setLevel(logging.ERROR)  # LeRobot logs a warning on every clamped step
 
@@ -141,7 +153,20 @@ class Rig:
         self.arm = SO101Follower(SO101FollowerConfig(
             port=follower_port, id="follower", disable_torque_on_disconnect=False, max_relative_target=dict(MAX_STEP)))
         self.arm.connect()
-        self.rest_q = self._read_q()
+        start_q = self._read_q()
+        try:
+            self.rest_q = np.array(json.load(open(REST_FILE))["joints_deg"], float)
+        except FileNotFoundError:
+            self.rest_q = start_q
+            print(f"WARNING: no {REST_FILE}; using the pose the arm is in now as rest. "
+                  "Fold the arm to rest and run: python -m arm_a.save_rest")
+        off = np.abs(start_q - self.rest_q)
+        if np.max(off) > REST_TOLERANCE_DEG:
+            bad = ", ".join(f"{j} {d:.0f} deg" for j, d in zip(ARM_JOINTS, off) if d > REST_TOLERANCE_DEG)
+            self.arm.disconnect()  # torque stays on: the arm holds where it is
+            self.scene.close(); self.wrist.close()
+            raise RuntimeError(f"The arm is not at its rest pose ({bad} off). Hold it, unplug the follower's "
+                               "power, fold it to rest, plug the power back in, and start again.")
         self.grip_target = self._read_gripper()
         self.holding = False
 
@@ -192,7 +217,7 @@ class Rig:
         state = {
             "grasp_centre_mm": {"x": round(x, 1), "y": round(y, 1), "height": round(h, 1)},
             "gripper_tilt_from_vertical_deg": round(tilt, 1),
-            "gripper_opening_0_100": round(g, 1),
+            "gripper_gap_mm": round(gap_mm(g)),
             "holding": self.holding,
             "frame_age_s": round(max(s_age, w_age), 2),
         }
@@ -304,7 +329,7 @@ class Rig:
         g = self._read_gripper()
         if action == "close":
             self.holding = g > HOLD_THRESHOLD
-        return {"ok": True, "gripper_opening_0_100": round(g, 1), "holding": self.holding}
+        return {"ok": True, "gripper_gap_mm": round(gap_mm(g)), "holding": self.holding}
 
     def home(self):
         """Hover pose clear of the table: 200 mm out, centred, 120 mm up."""
@@ -312,7 +337,7 @@ class Rig:
 
     # ---------- shutdown ----------
     def close(self):
-        """Return to the rest pose recorded at start; torque stays on."""
+        """Return to the saved rest pose (calib/rest_pose.json); torque stays on."""
         try:
             self.move_to(200.0, 0.0, 120.0)
             self._drive_joints(self.rest_q, settle_s=0.8)
