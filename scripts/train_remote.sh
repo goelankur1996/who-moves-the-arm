@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# Train one policy of the study on a fresh cloud GPU instance, upload its checkpoints, shut down.
+#
+# On the instance (Ubuntu with an NVIDIA driver, e.g. AWS "Deep Learning Base OSS Nvidia Driver
+# GPU AMI (Ubuntu 22.04)"), inside tmux so a dropped SSH connection does not stop it:
+#     curl -sLO https://raw.githubusercontent.com/goelankur1996/who-moves-the-arm/main/scripts/train_remote.sh
+#     HF_TOKEN=hf_... bash train_remote.sh B
+#
+# Runs (recipe from the study plan; B and C must stay identical apart from the dataset):
+#   B      SmolVLA from lerobot/smolvla_base on ankurcw/wmta_demos_v2, batch 64, 20k steps
+#   (C and C-ACT are added once the marked dataset exists)
+# Checkpoints every 5k steps; all of them go to https://huggingface.co/ankurcw/wmta_<run>
+# under checkpoints/<step>/. The instance shuts down at the end, also after a failure
+# (an EBS-backed EC2 instance stops on shutdown, so its disk is kept).
+set -euo pipefail
+
+RUN=${1:?usage: HF_TOKEN=... bash train_remote.sh B}
+: "${HF_TOKEN:?set HF_TOKEN to a Hugging Face token with write access}"
+LEROBOT_COMMIT=8bf6056d
+WORK=$HOME/wmta
+OUT=$WORK/outputs/$RUN
+LOG=$WORK/train_$RUN.log
+NO_SHUTDOWN=${NO_SHUTDOWN:-0}   # NO_SHUTDOWN=1 keeps the instance running (for debugging)
+BATCH=${BATCH:-64}               # 32 with STEPS=40000 if 64 does not fit in GPU memory (same epochs)
+STEPS=${STEPS:-20000}
+
+case "$RUN" in
+  B)
+    POLICY_ARGS=(--policy.path=lerobot/smolvla_base)
+    DATASET=ankurcw/wmta_demos_v2
+    REPO=ankurcw/wmta_B_smolvla
+    EXTRA=(
+           "--rename_map={\"observation.images.scene\": \"observation.images.camera1\", \"observation.images.wrist\": \"observation.images.camera2\"}")
+    ;;
+  *) echo "unknown run '$RUN'"; exit 2 ;;
+esac
+
+mkdir -p "$WORK"
+exec > >(tee -a "$LOG") 2>&1
+echo "== $(date -u) run $RUN on $(hostname); GPU:"; nvidia-smi --query-gpu=name,memory.total --format=csv
+
+finish() {
+  code=$?
+  echo "== $(date -u) training exited with code $code; uploading checkpoints"
+  export PATH="$HOME/.local/bin:$PATH"
+  if [ -d "$OUT/checkpoints" ]; then
+    for ck in "$OUT"/checkpoints/[0-9]*; do
+      [ -d "$ck/pretrained_model" ] || continue
+      "$WORK/lerobot/.venv/bin/hf" upload "$REPO" "$ck/pretrained_model" "checkpoints/$(basename "$ck")" \
+        --repo-type model --commit-message "$RUN checkpoint $(basename "$ck")" || echo "upload of $ck failed"
+    done
+  fi
+  "$WORK/lerobot/.venv/bin/hf" upload "$REPO" "$LOG" "logs/train_$RUN.log" --repo-type model || true
+  echo "== $(date -u) done (exit code $code)"
+  if [ "$NO_SHUTDOWN" != "1" ]; then sudo shutdown -h now; fi
+}
+trap finish EXIT
+
+# System packages and uv
+sudo apt-get update -qq && sudo apt-get install -y -qq git ffmpeg >/dev/null
+if ! command -v uv >/dev/null; then curl -LsSf https://astral.sh/uv/install.sh | sh; fi
+export PATH="$HOME/.local/bin:$PATH"
+
+# LeRobot at the study's pinned commit
+if [ ! -d "$WORK/lerobot" ]; then
+  git clone -q https://github.com/huggingface/lerobot.git "$WORK/lerobot"
+fi
+cd "$WORK/lerobot"
+git checkout -q "$LEROBOT_COMMIT"
+uv venv -q --python 3.12 .venv
+source .venv/bin/activate
+uv pip install -q -e ".[smolvla]"
+echo "== lerobot $(git rev-parse --short HEAD), torch $(python -c 'import torch; print(torch.__version__, torch.cuda.is_available())')"
+
+hf auth login --token "$HF_TOKEN" >/dev/null
+hf repo create "$REPO" --repo-type model --exist-ok >/dev/null || true
+
+train() {  # train <batch> <steps> <output dir> [extra args]
+  local batch=$1 steps=$2 out=$3; shift 3
+  lerobot-train \
+    "${POLICY_ARGS[@]}" \
+    --dataset.repo_id="$DATASET" \
+    --dataset.video_backend=pyav \
+    "${EXTRA[@]}" \
+    --batch_size="$batch" --steps="$steps" \
+    --log_freq=100 \
+    --seed=1000 \
+    --output_dir="$out" \
+    --job_name="wmta_$RUN" \
+    --policy.device=cuda \
+    --policy.push_to_hub=false \
+    --wandb.enable=false "$@"
+}
+
+# Memory check: 10 steps at the planned batch, nothing saved. If it does not fit, use batch 32
+# for twice the steps (same number of passes over the data) and say so in the log.
+if ! train "$BATCH" 10 "$WORK/preflight_${RUN}_$BATCH" --save_checkpoint=false; then
+  echo "== batch $BATCH does not fit on this GPU; using batch 32, steps $((STEPS * BATCH / 32))"
+  STEPS=$((STEPS * BATCH / 32)); BATCH=32
+  train "$BATCH" 10 "$WORK/preflight_${RUN}_$BATCH" --save_checkpoint=false
+fi
+echo "== $(date -u) training $RUN: batch $BATCH, steps $STEPS, checkpoints every 5000"
+train "$BATCH" "$STEPS" "$OUT" --save_freq=5000
