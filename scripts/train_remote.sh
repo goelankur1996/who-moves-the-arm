@@ -8,13 +8,16 @@
 #
 # Runs (recipe from the study plan; B and C must stay identical apart from the dataset):
 #   B      SmolVLA from lerobot/smolvla_base on ankurcw/wmta_demos_v2, batch 64, 20k steps
-#   (C and C-ACT are added once the marked dataset exists)
+#   C      the same, on ankurcw/wmta_demos_v2_marked (the demos with arm C's rings)
+#   C-ACT  ACT on ankurcw/wmta_demos_v2_marked, no language input, batch 8, 30k steps, mixed precision
+# C and C-ACT can run at the same time on one instance, each in its own tmux window: start the
+# second once the first has printed "training". Whichever finishes first leaves the instance up.
 # Checkpoints every 5k steps; all of them go to https://huggingface.co/ankurcw/wmta_<run>
 # under checkpoints/<step>/. The instance shuts down at the end, also after a failure
 # (an EBS-backed EC2 instance stops on shutdown, so its disk is kept).
 set -euo pipefail  # pipefail: a failed lerobot-train piped into tee still counts as failed
 
-RUN=${1:?usage: HF_TOKEN=... bash train_remote.sh B}
+RUN=${1:?usage: HF_TOKEN=... bash train_remote.sh B|C|C-ACT}
 : "${HF_TOKEN:?set HF_TOKEN to a Hugging Face token with write access}"
 LEROBOT_COMMIT=8bf6056d
 WORK=$HOME/wmta
@@ -22,16 +25,30 @@ OUT=$WORK/outputs/$RUN
 LOG=$WORK/train_$RUN.log
 TRAINING_STARTED=0
 NO_SHUTDOWN=${NO_SHUTDOWN:-0}   # NO_SHUTDOWN=1 keeps the instance running (for debugging)
-BATCH=${BATCH:-64}               # 32 with STEPS=40000 if 64 does not fit in GPU memory (same epochs)
-STEPS=${STEPS:-20000}
 
 case "$RUN" in
   B)
     POLICY_ARGS=(--policy.path=lerobot/smolvla_base)
     DATASET=ankurcw/wmta_demos_v2
     REPO=ankurcw/wmta_B_smolvla
+    BATCH=${BATCH:-64}; STEPS=${STEPS:-20000}
     EXTRA=(
            "--rename_map={\"observation.images.scene\": \"observation.images.camera1\", \"observation.images.wrist\": \"observation.images.camera2\"}")
+    ;;
+  C)
+    POLICY_ARGS=(--policy.path=lerobot/smolvla_base)
+    DATASET=ankurcw/wmta_demos_v2_marked
+    REPO=ankurcw/wmta_C_smolvla
+    BATCH=${BATCH:-64}; STEPS=${STEPS:-20000}
+    EXTRA=(
+           "--rename_map={\"observation.images.scene\": \"observation.images.camera1\", \"observation.images.wrist\": \"observation.images.camera2\"}")
+    ;;
+  C-ACT)
+    POLICY_ARGS=(--policy.type=act --policy.use_amp=true)
+    DATASET=ankurcw/wmta_demos_v2_marked
+    REPO=ankurcw/wmta_C-ACT_act
+    BATCH=${BATCH:-8}; STEPS=${STEPS:-30000}
+    EXTRA=()
     ;;
   *) echo "unknown run '$RUN'"; exit 2 ;;
 esac
@@ -55,7 +72,11 @@ finish() {
   echo "== $(date -u) done (exit code $code)"
   # Shut down only once real training has started; a failure in setup or the memory check
   # leaves the instance running so it can be fixed in place.
-  if [ "$NO_SHUTDOWN" != "1" ] && [ "$TRAINING_STARTED" = "1" ]; then sudo shutdown -h now; fi
+  # Another run still training on this instance (C and C-ACT together): leave it up for that one.
+  if [ "$NO_SHUTDOWN" != "1" ] && [ "$TRAINING_STARTED" = "1" ]; then
+    if pgrep -f lerobot-train >/dev/null; then echo "== another run is still training; not shutting down"
+    else sudo shutdown -h now; fi
+  fi
   if [ "$TRAINING_STARTED" != "1" ]; then echo "== instance left running (failed before training started)"; fi
 }
 trap finish EXIT
@@ -70,10 +91,12 @@ if [ ! -d "$WORK/lerobot" ]; then
   git clone -q https://github.com/huggingface/lerobot.git "$WORK/lerobot"
 fi
 cd "$WORK/lerobot"
-git checkout -q "$LEROBOT_COMMIT"
-uv venv -q --python 3.12 .venv
+if [ ! -x .venv/bin/lerobot-train ]; then   # set up once; a second run on the same instance reuses it
+  git checkout -q "$LEROBOT_COMMIT"
+  uv venv -q --python 3.12 .venv
+  VIRTUAL_ENV=$PWD/.venv uv pip install -q -e ".[smolvla,training]"   # training = datasets, av, accelerate, wandb
+fi
 source .venv/bin/activate
-uv pip install -q -e ".[smolvla,training]"   # training = datasets, av, accelerate, wandb
 echo "== lerobot $(git rev-parse --short HEAD), torch $(python -c 'import torch; print(torch.__version__, torch.cuda.is_available())')"
 
 hf auth login --token "$HF_TOKEN" >/dev/null
@@ -100,7 +123,7 @@ train() {  # train <batch> <steps> <output dir> [extra args]
 # switches to batch 32 for twice the steps (same passes over the data); any other error stops here.
 PRE="$WORK/preflight_${RUN}_$BATCH.log"
 if ! train "$BATCH" 10 "$WORK/preflight_${RUN}_$BATCH" --save_checkpoint=false 2>&1 | tee "$PRE"; then
-  if grep -qiE "out of memory|OutOfMemoryError" "$PRE"; then
+  if [ "$BATCH" -gt 32 ] && grep -qiE "out of memory|OutOfMemoryError" "$PRE"; then
     echo "== batch $BATCH does not fit on this GPU; using batch 32, steps $((STEPS * BATCH / 32))"
     STEPS=$((STEPS * BATCH / 32)); BATCH=32
     train "$BATCH" 10 "$WORK/preflight_${RUN}_$BATCH" --save_checkpoint=false

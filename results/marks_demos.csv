@@ -1,0 +1,81 @@
+episode_index,layout_id,condition,instruction,answer,decision,grasp_u,grasp_v,release_u,release_v,attempts,latency_s,error,grasp_err_px,grasp_nearest,grasp_right_object,release_err_px,release_nearest,release_right_container
+0,D-01,D0,put the blue B in the mug,1,approved,353.0,295.0,523.0,250.0,1,3.68,,3.2,blue_b,True,2.1,mug,True
+1,D-02,D0,put the orange cube in the pink tumbler,1,approved,415.0,265.0,257.0,314.0,1,3.13,,2.5,orange_cube,True,1.7,pink_tumbler,True
+2,D-03,D0,put the orange cube in the mug,1,approved,369.0,295.0,523.0,252.0,1,2.38,,3.9,orange_cube,True,2.5,mug,True
+3,D-04,D1,put the orange cube in the mug,1,approved,446.0,286.0,518.0,254.0,1,2.81,,0.9,orange_cube,True,4.6,mug,True
+4,D-05,D1,put the blue B in the mug,1,approved,358.0,280.0,517.0,253.0,1,2.95,,2.0,blue_b,True,4.7,mug,True
+5,D-06,D0,put the green D in the mug,1,approved,462.0,322.0,518.0,253.0,1,2.96,,3.0,green_d,True,3.9,mug,True
+6,D-07,D2,put the green D in the mug,1,approved,407.0,278.0,519.0,254.0,1,2.76,,1.4,green_d,True,4.0,mug,True
+7,D-08,D0,put the blue B in the pink tumbler,1,approved,440.0,300.0,257.0,315.0,1,1.87,,2.6,blue_b,True,2.4,pink_tumbler,True
+8,D-09,D0,put the orange cube in the pink tumbler,1,approved,367.0,303.0,257.0,315.0,1,1.76,,3.2,orange_cube,True,2.4,pink_tumbler,True
+9,D-10,D0,put the blue B in the pink tumbler,1,approved,437.0,261.0,256.0,315.0,1,3.16,,3.1,blue_b,True,2.0,pink_tumbler,True
+10,D-11,D2,put the blue B in the pink tumbler,1,approved,376.0,271.0,255.0,316.0,1,2.09,,2.6,blue_b,True,3.1,pink_tumbler,True
+11,D-12,D2,put the orange cube in the mug,1,approved,427.0,258.0,521.0,252.0,1,2.05,,0.9,orange_cube,True,1.5,mug,True
+12,D-13,D1,put the green D in the pink tumbler,1,approved,344.0,244.0,257.0,314.0,1,2.27,,3.4,green_d,True,1.7,pink_tumbler,True
+13,D-14,D0,put the blue B in the pink tumbler,1,approved,374.0,282.0,255.0,313.0,1,1.85,,1.8,blue_b,True,0.6,pink_tumbler,True
+14,D-15,D0,put the green D in the mug,1,approved,351.0,281.0,521.0,253.0,1,2.56,,4.3,green_d,True,2.5,mug,True
+15,D-16,D0,put the green D in the mug,1,approved,421.0,237.0,520.0,253.0,1,2.83,,5.9,green_d,True,2.7,mug,True
+16,D-17,D0,put the orange cube in the pink tumbler,1,approved,354.0,246.0,255.0,314.0,1,1.88,,2.8,orange_cube,True,1.2,pink_tumbler,True
+17,D-18,D1,put the green D in the pink tumbler,1,approved,412.0,280.0,256.0,315.0,1,2.18,,3.4,green_d,True,2.0,pink_tumbler,True
+18,D-19,D1,put the blue B in the pink tumbler,1,approved,326.0,272.0,256.0,314.0,1,2.14,,3.1,blue_b,True,1.1,pink_tumbler,True
+19,D-20,D2,put the green D in the mug,1,approved,423.0,312.0,520.0,253.0,1,2.83,,1.8,green_d,True,2.7,mug,True
+20,D-21,D1,put the blue B in the pink tumbler,1,approved,410.0,229.0,256.0,315.0,1,2.04,,4.9,blue_b,True,2.0,pink_tumbler,True
+21,D-22,D0,put the orange cube in the pink tumbler,1,approved,389.0,230.0,257.0,314.0,1,2.16,,2.4,orange_cube,True,1.7,pink_tumbler,True
+22,D-23,D0,put the orange cube in the mug,1,approved,376.0,300.0,522.0,252.0,1,2.53,,1.4,orange_cube,True,1.8,mug,True
+23,D-24,D0,put the blue B in the mug,1,approved,396.0,277.0,521.0,250.0,1,3.18,,1.4,blue_b,True,0.5,mug,True
+24,D-25,D0,put the blue B in the mug,1,approved,401.0,313.0,521.0,255.0,1,1.83,,4.7,blue_b,True,4.5,mug,True
+25,D-26,D2,put the green D in the pink tumbler,1,approved,348.0,316.0,256.0,315.0,1,1.77,,3.3,green_d,True,2.0,pink_tumbler,True
+26,D-27,D1,put the orange cube in the pink tumbler,1,approved,429.0,255.0,256.0,314.0,1,1.85,,1.6,orange_cube,True,1.1,pink_tumbler,True
+27,D-28,D2,put the green D in the pink tumbler,1,approved,353.0,264.0,258.0,316.0,1,2.06,,4.2,green_d,True,3.8,pink_tumbler,True
+28,D-29,D0,put the green D in the pink tumbler,1,approved,395.0,278.0,257.0,313.0,1,2.56,,3.7,green_d,True,1.4,pink_tumbler,True
+29,D-30,D0,put the orange cube in the mug,1,approved,390.0,256.0,518.0,252.0,1,2.58,,1.9,orange_cube,True,3.4,mug,True
+30,D-31,D2,put the green D in the mug,1,approved,393.0,237.0,522.0,252.0,1,2.56,,5.0,green_d,True,1.8,mug,True
+31,D-32,D0,put the orange cube in the mug,1,approved,339.0,316.0,522.0,251.0,1,3.56,,4.3,orange_cube,True,1.1,mug,True
+32,D-33,D0,put the blue B in the pink tumbler,1,approved,419.0,250.0,258.0,314.0,1,2.07,,2.2,blue_b,True,2.6,pink_tumbler,True
+33,D-34,D0,put the green D in the pink tumbler,1,approved,421.0,281.0,254.0,314.0,1,1.97,,4.5,green_d,True,1.9,pink_tumbler,True
+34,D-35,D0,put the orange cube in the pink tumbler,1,approved,402.0,273.0,256.0,314.0,1,1.82,,1.0,orange_cube,True,1.1,pink_tumbler,True
+35,D-36,D2,put the orange cube in the pink tumbler,1,approved,310.0,267.0,257.0,314.0,1,1.97,,2.2,orange_cube,True,1.7,pink_tumbler,True
+36,D-37,D1,put the blue B in the mug,1,approved,324.0,269.0,521.0,253.0,1,2.66,,1.8,blue_b,True,2.5,mug,True
+37,D-38,D0,put the orange cube in the mug,1,approved,354.0,272.0,517.0,256.0,1,2.96,,1.9,orange_cube,True,6.8,mug,True
+38,D-39,D1,put the green D in the mug,1,approved,416.0,242.0,514.0,256.0,1,2.96,,2.3,green_d,True,8.9,mug,True
+39,D-40,D0,put the green D in the pink tumbler,1,approved,322.0,253.0,258.0,315.0,1,2.96,,1.5,green_d,True,3.1,pink_tumbler,True
+40,D-41,D0,put the blue B in the pink tumbler,1,approved,385.0,247.0,258.0,315.0,1,1.94,,5.2,blue_b,True,3.1,pink_tumbler,True
+41,D-42,D0,put the green D in the pink tumbler,1,approved,450.0,298.0,258.0,315.0,1,6.09,,1.0,green_d,True,3.1,pink_tumbler,True
+42,D-43,D1,put the blue B in the mug,1,approved,377.0,273.0,516.0,258.0,1,2.69,,6.2,blue_b,True,9.0,mug,True
+43,D-44,D2,put the blue B in the mug,1,approved,401.0,307.0,516.0,255.0,1,2.89,,3.9,blue_b,True,6.7,mug,True
+44,D-45,D1,put the green D in the mug,1,approved,350.0,317.0,517.0,257.0,1,2.7,,1.9,green_d,True,7.6,mug,True
+45,D-46,D0,put the blue B in the pink tumbler,1,approved,411.0,320.0,259.0,314.0,1,2.13,,2.9,blue_b,True,3.5,pink_tumbler,True
+46,D-47,D0,put the green D in the pink tumbler,1,approved,400.0,273.0,258.0,315.0,1,2.18,,2.8,green_d,True,3.1,pink_tumbler,True
+47,D-48,D0,put the blue B in the mug,1,approved,418.0,254.0,517.0,254.0,1,3.41,,3.4,blue_b,True,5.3,mug,True
+48,D-49,D1,put the orange cube in the mug,1,approved,393.0,262.0,516.0,256.0,1,2.96,,0.3,orange_cube,True,7.4,mug,True
+49,D-50,D0,put the orange cube in the mug,1,approved,318.0,290.0,512.0,256.0,1,2.56,,1.9,orange_cube,True,10.5,mug,True
+50,D-51,D0,put the blue B in the mug,1,approved,351.0,287.0,522.0,252.0,1,3.7,,3.0,blue_b,True,1.8,mug,True
+51,D-52,D0,put the orange cube in the pink tumbler,1,approved,424.0,322.0,258.0,314.0,1,1.9,,2.5,orange_cube,True,2.6,pink_tumbler,True
+52,D-53,D0,put the green D in the mug,1,approved,400.0,296.0,522.0,250.0,1,2.14,,4.1,green_d,True,1.1,mug,True
+53,D-54,D1,put the blue B in the pink tumbler,1,approved,431.0,273.0,257.0,314.0,1,1.97,,5.9,blue_b,True,1.7,pink_tumbler,True
+54,D-55,D2,put the blue B in the mug,1,approved,393.0,310.0,521.0,255.0,1,2.81,,2.2,blue_b,True,4.5,mug,True
+55,D-56,D1,put the orange cube in the pink tumbler,1,approved,455.0,323.0,259.0,315.0,1,1.77,,2.7,orange_cube,True,3.9,pink_tumbler,True
+56,D-57,D2,put the blue B in the pink tumbler,1,approved,370.0,283.0,259.0,314.0,1,1.8,,1.2,blue_b,True,3.5,pink_tumbler,True
+57,D-58,D1,put the orange cube in the mug,1,approved,422.0,320.0,522.0,252.0,1,2.52,,1.7,orange_cube,True,1.8,mug,True
+58,D-59,D0,put the orange cube in the mug,1,approved,429.0,235.0,522.0,251.0,1,2.88,,0.3,orange_cube,True,1.1,mug,True
+59,D-60,D0,put the green D in the mug,1,approved,414.0,250.0,521.0,255.0,1,2.79,,4.5,green_d,True,4.5,mug,True
+60,D-61,D0,put the green D in the pink tumbler,1,approved,373.0,314.0,258.0,314.0,1,2.09,,6.0,green_d,True,2.6,pink_tumbler,True
+61,D-62,D2,put the orange cube in the pink tumbler,1,approved,405.0,278.0,258.0,315.0,1,2.02,,1.8,orange_cube,True,3.1,pink_tumbler,True
+62,D-63,D2,put the orange cube in the pink tumbler,1,approved,333.0,265.0,258.0,314.0,1,1.87,,2.2,orange_cube,True,2.6,pink_tumbler,True
+63,D-64,D0,put the orange cube in the pink tumbler,1,approved,372.0,259.0,258.0,315.0,1,1.95,,3.6,orange_cube,True,3.1,pink_tumbler,True
+64,D-65,D1,put the green D in the pink tumbler,1,approved,442.0,285.0,259.0,315.0,1,1.92,,2.8,green_d,True,3.9,pink_tumbler,True
+65,D-66,D0,put the blue B in the pink tumbler,1,approved,345.0,316.0,259.0,314.0,1,2.17,,3.0,blue_b,True,3.5,pink_tumbler,True
+66,D-67,D1,put the blue B in the mug,1,approved,384.0,296.0,522.0,253.0,1,3.44,,4.1,blue_b,True,2.7,mug,True
+67,D-68,D0,put the green D in the mug,1,approved,433.0,279.0,522.0,253.0,1,4.43,,3.7,green_d,True,2.7,mug,True
+68,D-69,D2,put the orange cube in the mug,1,approved,410.0,255.0,520.0,252.0,1,2.98,,4.7,orange_cube,True,1.8,mug,True
+69,D-70,D2,put the orange cube in the mug,1,approved,350.0,294.0,523.0,252.0,1,2.86,,1.9,orange_cube,True,2.5,mug,True
+70,D-71,D1,put the green D in the mug,1,approved,402.0,234.0,521.0,255.0,1,2.21,,3.3,green_d,True,4.5,mug,True
+71,D-72,D0,put the green D in the mug,1,approved,424.0,294.0,521.0,252.0,1,3.27,,3.3,green_d,True,1.5,mug,True
+72,D-73,D1,put the orange cube in the pink tumbler,1,approved,380.0,263.0,258.0,314.0,1,2.07,,2.3,orange_cube,True,2.6,pink_tumbler,True
+73,D-74,D2,put the blue B in the mug,1,approved,358.0,270.0,521.0,253.0,1,2.86,,2.2,blue_b,True,2.5,mug,True
+74,D-75,D1,put the blue B in the pink tumbler,1,approved,434.0,242.0,257.0,314.0,1,2.25,,2.4,blue_b,True,1.7,pink_tumbler,True
+75,D-76,D2,put the blue B in the mug,1,approved,333.0,298.0,524.0,254.0,1,3.27,,1.1,blue_b,True,4.6,mug,True
+76,D-77,D2,put the green D in the pink tumbler,1,approved,432.0,254.0,259.0,315.0,1,2.35,,3.3,green_d,True,3.9,pink_tumbler,True
+77,D-78,D2,put the blue B in the pink tumbler,1,approved,335.0,282.0,259.0,314.0,1,1.88,,2.7,blue_b,True,3.5,pink_tumbler,True
+78,D-79,D2,put the orange cube in the pink tumbler,1,approved,369.0,304.0,258.0,316.0,1,1.79,,1.7,orange_cube,True,3.8,pink_tumbler,True
+79,D-80,D0,put the blue B in the mug,1,approved,354.0,293.0,522.0,253.0,1,2.97,,5.1,blue_b,True,2.7,mug,True

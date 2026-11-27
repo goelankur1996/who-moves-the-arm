@@ -1,0 +1,2722 @@
+{
+ "0": {
+  "layout_id": "D-01",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     353.0,
+     295.0
+    ],
+    "release": [
+     523.0,
+     250.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.68,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 188
+    },
+    "raw": [
+     {
+      "grasp_u": 353,
+      "grasp_v": 295,
+      "release_u": 523,
+      "release_v": 250
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:14:43",
+    "decision": "approved"
+   }
+  ]
+ },
+ "1": {
+  "layout_id": "D-02",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     415.0,
+     265.0
+    ],
+    "release": [
+     257.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.13,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 415,
+      "grasp_v": 265,
+      "release_u": 257,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:14:43",
+    "decision": "approved"
+   }
+  ]
+ },
+ "2": {
+  "layout_id": "D-03",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     369.0,
+     295.0
+    ],
+    "release": [
+     523.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.38,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 173
+    },
+    "raw": [
+     {
+      "grasp_u": 369,
+      "grasp_v": 295,
+      "release_u": 523,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:48",
+    "decision": "approved"
+   }
+  ]
+ },
+ "3": {
+  "layout_id": "D-04",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     446.0,
+     286.0
+    ],
+    "release": [
+     518.0,
+     254.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.81,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 209
+    },
+    "raw": [
+     {
+      "grasp_u": 446,
+      "grasp_v": 286,
+      "release_u": 518,
+      "release_v": 254
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:49",
+    "decision": "approved"
+   }
+  ]
+ },
+ "4": {
+  "layout_id": "D-05",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     358.0,
+     280.0
+    ],
+    "release": [
+     517.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.95,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 212
+    },
+    "raw": [
+     {
+      "grasp_u": 358,
+      "grasp_v": 280,
+      "release_u": 517,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:51",
+    "decision": "approved"
+   }
+  ]
+ },
+ "5": {
+  "layout_id": "D-06",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     462.0,
+     322.0
+    ],
+    "release": [
+     518.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.96,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 212
+    },
+    "raw": [
+     {
+      "grasp_u": 462,
+      "grasp_v": 322,
+      "release_u": 518,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:52",
+    "decision": "approved"
+   }
+  ]
+ },
+ "6": {
+  "layout_id": "D-07",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     407.0,
+     278.0
+    ],
+    "release": [
+     519.0,
+     254.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.76,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 210
+    },
+    "raw": [
+     {
+      "grasp_u": 407,
+      "grasp_v": 278,
+      "release_u": 519,
+      "release_v": 254
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:54",
+    "decision": "approved"
+   }
+  ]
+ },
+ "7": {
+  "layout_id": "D-08",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     440.0,
+     300.0
+    ],
+    "release": [
+     257.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.87,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 440,
+      "grasp_v": 300,
+      "release_u": 257,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:54",
+    "decision": "approved"
+   }
+  ]
+ },
+ "8": {
+  "layout_id": "D-09",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     367.0,
+     303.0
+    ],
+    "release": [
+     257.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.76,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 367,
+      "grasp_v": 303,
+      "release_u": 257,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:55",
+    "decision": "approved"
+   }
+  ]
+ },
+ "9": {
+  "layout_id": "D-10",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     437.0,
+     261.0
+    ],
+    "release": [
+     256.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.16,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 437,
+      "grasp_v": 261,
+      "release_u": 256,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:57",
+    "decision": "approved"
+   }
+  ]
+ },
+ "10": {
+  "layout_id": "D-11",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     376.0,
+     271.0
+    ],
+    "release": [
+     255.0,
+     316.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.09,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 376,
+      "grasp_v": 271,
+      "release_u": 255,
+      "release_v": 316
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:16:58",
+    "decision": "approved"
+   }
+  ]
+ },
+ "11": {
+  "layout_id": "D-12",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     427.0,
+     258.0
+    ],
+    "release": [
+     521.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.05,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 427,
+      "grasp_v": 258,
+      "release_u": 521,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:00",
+    "decision": "approved"
+   }
+  ]
+ },
+ "12": {
+  "layout_id": "D-13",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     344.0,
+     244.0
+    ],
+    "release": [
+     257.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.27,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 344,
+      "grasp_v": 244,
+      "release_u": 257,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:00",
+    "decision": "approved"
+   }
+  ]
+ },
+ "13": {
+  "layout_id": "D-14",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     374.0,
+     282.0
+    ],
+    "release": [
+     255.0,
+     313.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.85,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 374,
+      "grasp_v": 282,
+      "release_u": 255,
+      "release_v": 313
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:01",
+    "decision": "approved"
+   }
+  ]
+ },
+ "14": {
+  "layout_id": "D-15",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     351.0,
+     281.0
+    ],
+    "release": [
+     521.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.56,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 181
+    },
+    "raw": [
+     {
+      "grasp_u": 351,
+      "grasp_v": 281,
+      "release_u": 521,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:02",
+    "decision": "approved"
+   }
+  ]
+ },
+ "15": {
+  "layout_id": "D-16",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     421.0,
+     237.0
+    ],
+    "release": [
+     520.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.83,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 162
+    },
+    "raw": [
+     {
+      "grasp_u": 421,
+      "grasp_v": 237,
+      "release_u": 520,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:04",
+    "decision": "approved"
+   }
+  ]
+ },
+ "16": {
+  "layout_id": "D-17",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     354.0,
+     246.0
+    ],
+    "release": [
+     255.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.88,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 354,
+      "grasp_v": 246,
+      "release_u": 255,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:04",
+    "decision": "approved"
+   }
+  ]
+ },
+ "17": {
+  "layout_id": "D-18",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     412.0,
+     280.0
+    ],
+    "release": [
+     256.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.18,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 412,
+      "grasp_v": 280,
+      "release_u": 256,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:07",
+    "decision": "approved"
+   }
+  ]
+ },
+ "18": {
+  "layout_id": "D-19",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     326.0,
+     272.0
+    ],
+    "release": [
+     256.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.14,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 326,
+      "grasp_v": 272,
+      "release_u": 256,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:06",
+    "decision": "approved"
+   }
+  ]
+ },
+ "19": {
+  "layout_id": "D-20",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     423.0,
+     312.0
+    ],
+    "release": [
+     520.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.83,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 167
+    },
+    "raw": [
+     {
+      "grasp_u": 423,
+      "grasp_v": 312,
+      "release_u": 520,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:09",
+    "decision": "approved"
+   }
+  ]
+ },
+ "20": {
+  "layout_id": "D-21",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     410.0,
+     229.0
+    ],
+    "release": [
+     256.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.04,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 410,
+      "grasp_v": 229,
+      "release_u": 256,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:09",
+    "decision": "approved"
+   }
+  ]
+ },
+ "21": {
+  "layout_id": "D-22",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     389.0,
+     230.0
+    ],
+    "release": [
+     257.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.16,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 389,
+      "grasp_v": 230,
+      "release_u": 257,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:11",
+    "decision": "approved"
+   }
+  ]
+ },
+ "22": {
+  "layout_id": "D-23",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     376.0,
+     300.0
+    ],
+    "release": [
+     522.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.53,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 160
+    },
+    "raw": [
+     {
+      "grasp_u": 376,
+      "grasp_v": 300,
+      "release_u": 522,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:12",
+    "decision": "approved"
+   }
+  ]
+ },
+ "23": {
+  "layout_id": "D-24",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     396.0,
+     277.0
+    ],
+    "release": [
+     521.0,
+     250.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.18,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 218
+    },
+    "raw": [
+     {
+      "grasp_u": 396,
+      "grasp_v": 277,
+      "release_u": 521,
+      "release_v": 250
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:14",
+    "decision": "approved"
+   }
+  ]
+ },
+ "24": {
+  "layout_id": "D-25",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     401.0,
+     313.0
+    ],
+    "release": [
+     521.0,
+     255.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.83,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 401,
+      "grasp_v": 313,
+      "release_u": 521,
+      "release_v": 255
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:14",
+    "decision": "approved"
+   }
+  ]
+ },
+ "25": {
+  "layout_id": "D-26",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     348.0,
+     316.0
+    ],
+    "release": [
+     256.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.77,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 348,
+      "grasp_v": 316,
+      "release_u": 256,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:16",
+    "decision": "approved"
+   }
+  ]
+ },
+ "26": {
+  "layout_id": "D-27",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     429.0,
+     255.0
+    ],
+    "release": [
+     256.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.85,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 429,
+      "grasp_v": 255,
+      "release_u": 256,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:16",
+    "decision": "approved"
+   }
+  ]
+ },
+ "27": {
+  "layout_id": "D-28",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     353.0,
+     264.0
+    ],
+    "release": [
+     258.0,
+     316.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.06,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 353,
+      "grasp_v": 264,
+      "release_u": 258,
+      "release_v": 316
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:18",
+    "decision": "approved"
+   }
+  ]
+ },
+ "28": {
+  "layout_id": "D-29",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     395.0,
+     278.0
+    ],
+    "release": [
+     257.0,
+     313.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.56,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 395,
+      "grasp_v": 278,
+      "release_u": 257,
+      "release_v": 313
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:19",
+    "decision": "approved"
+   }
+  ]
+ },
+ "29": {
+  "layout_id": "D-30",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     390.0,
+     256.0
+    ],
+    "release": [
+     518.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.58,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 390,
+      "grasp_v": 256,
+      "release_u": 518,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:21",
+    "decision": "approved"
+   }
+  ]
+ },
+ "30": {
+  "layout_id": "D-31",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     393.0,
+     237.0
+    ],
+    "release": [
+     522.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.56,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 184
+    },
+    "raw": [
+     {
+      "grasp_u": 393,
+      "grasp_v": 237,
+      "release_u": 522,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:21",
+    "decision": "approved"
+   }
+  ]
+ },
+ "31": {
+  "layout_id": "D-32",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     339.0,
+     316.0
+    ],
+    "release": [
+     522.0,
+     251.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.56,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 219
+    },
+    "raw": [
+     {
+      "grasp_u": 339,
+      "grasp_v": 316,
+      "release_u": 522,
+      "release_v": 251
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:24",
+    "decision": "approved"
+   }
+  ]
+ },
+ "32": {
+  "layout_id": "D-33",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     419.0,
+     250.0
+    ],
+    "release": [
+     258.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.07,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 419,
+      "grasp_v": 250,
+      "release_u": 258,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:23",
+    "decision": "approved"
+   }
+  ]
+ },
+ "33": {
+  "layout_id": "D-34",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     421.0,
+     281.0
+    ],
+    "release": [
+     254.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.97,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 421,
+      "grasp_v": 281,
+      "release_u": 254,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:25",
+    "decision": "approved"
+   }
+  ]
+ },
+ "34": {
+  "layout_id": "D-35",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     402.0,
+     273.0
+    ],
+    "release": [
+     256.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.82,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 402,
+      "grasp_v": 273,
+      "release_u": 256,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:26",
+    "decision": "approved"
+   }
+  ]
+ },
+ "35": {
+  "layout_id": "D-36",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     310.0,
+     267.0
+    ],
+    "release": [
+     257.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.97,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 310,
+      "grasp_v": 267,
+      "release_u": 257,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:27",
+    "decision": "approved"
+   }
+  ]
+ },
+ "36": {
+  "layout_id": "D-37",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     324.0,
+     269.0
+    ],
+    "release": [
+     521.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.66,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 204
+    },
+    "raw": [
+     {
+      "grasp_u": 324,
+      "grasp_v": 269,
+      "release_u": 521,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:29",
+    "decision": "approved"
+   }
+  ]
+ },
+ "37": {
+  "layout_id": "D-38",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     354.0,
+     272.0
+    ],
+    "release": [
+     517.0,
+     256.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.96,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 213
+    },
+    "raw": [
+     {
+      "grasp_u": 354,
+      "grasp_v": 272,
+      "release_u": 517,
+      "release_v": 256
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:30",
+    "decision": "approved"
+   }
+  ]
+ },
+ "38": {
+  "layout_id": "D-39",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     416.0,
+     242.0
+    ],
+    "release": [
+     514.0,
+     256.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.96,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 203
+    },
+    "raw": [
+     {
+      "grasp_u": 416,
+      "grasp_v": 242,
+      "release_u": 514,
+      "release_v": 256
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:32",
+    "decision": "approved"
+   }
+  ]
+ },
+ "39": {
+  "layout_id": "D-40",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     322.0,
+     253.0
+    ],
+    "release": [
+     258.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.96,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 322,
+      "grasp_v": 253,
+      "release_u": 258,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:33",
+    "decision": "approved"
+   }
+  ]
+ },
+ "40": {
+  "layout_id": "D-41",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     385.0,
+     247.0
+    ],
+    "release": [
+     258.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.94,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 385,
+      "grasp_v": 247,
+      "release_u": 258,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:33",
+    "decision": "approved"
+   }
+  ]
+ },
+ "41": {
+  "layout_id": "D-42",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     450.0,
+     298.0
+    ],
+    "release": [
+     258.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 6.09,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 450,
+      "grasp_v": 298,
+      "release_u": 258,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:39",
+    "decision": "approved"
+   }
+  ]
+ },
+ "42": {
+  "layout_id": "D-43",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     377.0,
+     273.0
+    ],
+    "release": [
+     516.0,
+     258.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.69,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 170
+    },
+    "raw": [
+     {
+      "grasp_u": 377,
+      "grasp_v": 273,
+      "release_u": 516,
+      "release_v": 258
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:36",
+    "decision": "approved"
+   }
+  ]
+ },
+ "43": {
+  "layout_id": "D-44",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     401.0,
+     307.0
+    ],
+    "release": [
+     516.0,
+     255.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.89,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 194
+    },
+    "raw": [
+     {
+      "grasp_u": 401,
+      "grasp_v": 307,
+      "release_u": 516,
+      "release_v": 255
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:39",
+    "decision": "approved"
+   }
+  ]
+ },
+ "44": {
+  "layout_id": "D-45",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     350.0,
+     317.0
+    ],
+    "release": [
+     517.0,
+     257.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.7,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 187
+    },
+    "raw": [
+     {
+      "grasp_u": 350,
+      "grasp_v": 317,
+      "release_u": 517,
+      "release_v": 257
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:42",
+    "decision": "approved"
+   }
+  ]
+ },
+ "45": {
+  "layout_id": "D-46",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     411.0,
+     320.0
+    ],
+    "release": [
+     259.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.13,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 411,
+      "grasp_v": 320,
+      "release_u": 259,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:41",
+    "decision": "approved"
+   }
+  ]
+ },
+ "46": {
+  "layout_id": "D-47",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     400.0,
+     273.0
+    ],
+    "release": [
+     258.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.18,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 400,
+      "grasp_v": 273,
+      "release_u": 258,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:44",
+    "decision": "approved"
+   }
+  ]
+ },
+ "47": {
+  "layout_id": "D-48",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     418.0,
+     254.0
+    ],
+    "release": [
+     517.0,
+     254.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.41,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 219
+    },
+    "raw": [
+     {
+      "grasp_u": 418,
+      "grasp_v": 254,
+      "release_u": 517,
+      "release_v": 254
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:45",
+    "decision": "approved"
+   }
+  ]
+ },
+ "48": {
+  "layout_id": "D-49",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     393.0,
+     262.0
+    ],
+    "release": [
+     516.0,
+     256.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.96,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 221
+    },
+    "raw": [
+     {
+      "grasp_u": 393,
+      "grasp_v": 262,
+      "release_u": 516,
+      "release_v": 256
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:47",
+    "decision": "approved"
+   }
+  ]
+ },
+ "49": {
+  "layout_id": "D-50",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     318.0,
+     290.0
+    ],
+    "release": [
+     512.0,
+     256.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.56,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 191
+    },
+    "raw": [
+     {
+      "grasp_u": 318,
+      "grasp_v": 290,
+      "release_u": 512,
+      "release_v": 256
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:48",
+    "decision": "approved"
+   }
+  ]
+ },
+ "50": {
+  "layout_id": "D-51",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     351.0,
+     287.0
+    ],
+    "release": [
+     522.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.7,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 215
+    },
+    "raw": [
+     {
+      "grasp_u": 351,
+      "grasp_v": 287,
+      "release_u": 522,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:50",
+    "decision": "approved"
+   }
+  ]
+ },
+ "51": {
+  "layout_id": "D-52",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     424.0,
+     322.0
+    ],
+    "release": [
+     258.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.9,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 424,
+      "grasp_v": 322,
+      "release_u": 258,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:50",
+    "decision": "approved"
+   }
+  ]
+ },
+ "52": {
+  "layout_id": "D-53",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     400.0,
+     296.0
+    ],
+    "release": [
+     522.0,
+     250.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.14,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 160
+    },
+    "raw": [
+     {
+      "grasp_u": 400,
+      "grasp_v": 296,
+      "release_u": 522,
+      "release_v": 250
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:52",
+    "decision": "approved"
+   }
+  ]
+ },
+ "53": {
+  "layout_id": "D-54",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     431.0,
+     273.0
+    ],
+    "release": [
+     257.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.97,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 431,
+      "grasp_v": 273,
+      "release_u": 257,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:52",
+    "decision": "approved"
+   }
+  ]
+ },
+ "54": {
+  "layout_id": "D-55",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     393.0,
+     310.0
+    ],
+    "release": [
+     521.0,
+     255.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.81,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 202
+    },
+    "raw": [
+     {
+      "grasp_u": 393,
+      "grasp_v": 310,
+      "release_u": 521,
+      "release_v": 255
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:55",
+    "decision": "approved"
+   }
+  ]
+ },
+ "55": {
+  "layout_id": "D-56",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     455.0,
+     323.0
+    ],
+    "release": [
+     259.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.77,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 455,
+      "grasp_v": 323,
+      "release_u": 259,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:54",
+    "decision": "approved"
+   }
+  ]
+ },
+ "56": {
+  "layout_id": "D-57",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     370.0,
+     283.0
+    ],
+    "release": [
+     259.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.8,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 370,
+      "grasp_v": 283,
+      "release_u": 259,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:56",
+    "decision": "approved"
+   }
+  ]
+ },
+ "57": {
+  "layout_id": "D-58",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     422.0,
+     320.0
+    ],
+    "release": [
+     522.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.52,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 191
+    },
+    "raw": [
+     {
+      "grasp_u": 422,
+      "grasp_v": 320,
+      "release_u": 522,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:57",
+    "decision": "approved"
+   }
+  ]
+ },
+ "58": {
+  "layout_id": "D-59",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     429.0,
+     235.0
+    ],
+    "release": [
+     522.0,
+     251.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.88,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 209
+    },
+    "raw": [
+     {
+      "grasp_u": 429,
+      "grasp_v": 235,
+      "release_u": 522,
+      "release_v": 251
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:17:59",
+    "decision": "approved"
+   }
+  ]
+ },
+ "59": {
+  "layout_id": "D-60",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     414.0,
+     250.0
+    ],
+    "release": [
+     521.0,
+     255.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.79,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 201
+    },
+    "raw": [
+     {
+      "grasp_u": 414,
+      "grasp_v": 250,
+      "release_u": 521,
+      "release_v": 255
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:00",
+    "decision": "approved"
+   }
+  ]
+ },
+ "60": {
+  "layout_id": "D-61",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     373.0,
+     314.0
+    ],
+    "release": [
+     258.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.09,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 373,
+      "grasp_v": 314,
+      "release_u": 258,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:01",
+    "decision": "approved"
+   }
+  ]
+ },
+ "61": {
+  "layout_id": "D-62",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     405.0,
+     278.0
+    ],
+    "release": [
+     258.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.02,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 405,
+      "grasp_v": 278,
+      "release_u": 258,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:02",
+    "decision": "approved"
+   }
+  ]
+ },
+ "62": {
+  "layout_id": "D-63",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     333.0,
+     265.0
+    ],
+    "release": [
+     258.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.87,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 333,
+      "grasp_v": 265,
+      "release_u": 258,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:03",
+    "decision": "approved"
+   }
+  ]
+ },
+ "63": {
+  "layout_id": "D-64",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     372.0,
+     259.0
+    ],
+    "release": [
+     258.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.95,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 372,
+      "grasp_v": 259,
+      "release_u": 258,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:04",
+    "decision": "approved"
+   }
+  ]
+ },
+ "64": {
+  "layout_id": "D-65",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     442.0,
+     285.0
+    ],
+    "release": [
+     259.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.92,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 442,
+      "grasp_v": 285,
+      "release_u": 259,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:05",
+    "decision": "approved"
+   }
+  ]
+ },
+ "65": {
+  "layout_id": "D-66",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     345.0,
+     316.0
+    ],
+    "release": [
+     259.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.17,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 345,
+      "grasp_v": 316,
+      "release_u": 259,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:07",
+    "decision": "approved"
+   }
+  ]
+ },
+ "66": {
+  "layout_id": "D-67",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     384.0,
+     296.0
+    ],
+    "release": [
+     522.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.44,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 238
+    },
+    "raw": [
+     {
+      "grasp_u": 384,
+      "grasp_v": 296,
+      "release_u": 522,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:08",
+    "decision": "approved"
+   }
+  ]
+ },
+ "67": {
+  "layout_id": "D-68",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     433.0,
+     279.0
+    ],
+    "release": [
+     522.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 4.43,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 170
+    },
+    "raw": [
+     {
+      "grasp_u": 433,
+      "grasp_v": 279,
+      "release_u": 522,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:11",
+    "decision": "approved"
+   }
+  ]
+ },
+ "68": {
+  "layout_id": "D-69",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     410.0,
+     255.0
+    ],
+    "release": [
+     520.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.98,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 168
+    },
+    "raw": [
+     {
+      "grasp_u": 410,
+      "grasp_v": 255,
+      "release_u": 520,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:12",
+    "decision": "approved"
+   }
+  ]
+ },
+ "69": {
+  "layout_id": "D-70",
+  "instruction": "put the orange cube in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     350.0,
+     294.0
+    ],
+    "release": [
+     523.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.86,
+    "usage": {
+     "input_tokens": 1053,
+     "output_tokens": 191
+    },
+    "raw": [
+     {
+      "grasp_u": 350,
+      "grasp_v": 294,
+      "release_u": 523,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:14",
+    "decision": "approved"
+   }
+  ]
+ },
+ "70": {
+  "layout_id": "D-71",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     402.0,
+     234.0
+    ],
+    "release": [
+     521.0,
+     255.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.21,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 157
+    },
+    "raw": [
+     {
+      "grasp_u": 402,
+      "grasp_v": 234,
+      "release_u": 521,
+      "release_v": 255
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:14",
+    "decision": "approved"
+   }
+  ]
+ },
+ "71": {
+  "layout_id": "D-72",
+  "instruction": "put the green D in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     424.0,
+     294.0
+    ],
+    "release": [
+     521.0,
+     252.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.27,
+    "usage": {
+     "input_tokens": 1051,
+     "output_tokens": 225
+    },
+    "raw": [
+     {
+      "grasp_u": 424,
+      "grasp_v": 294,
+      "release_u": 521,
+      "release_v": 252
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:17",
+    "decision": "approved"
+   }
+  ]
+ },
+ "72": {
+  "layout_id": "D-73",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     380.0,
+     263.0
+    ],
+    "release": [
+     258.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.07,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 380,
+      "grasp_v": 263,
+      "release_u": 258,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:16",
+    "decision": "approved"
+   }
+  ]
+ },
+ "73": {
+  "layout_id": "D-74",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     358.0,
+     270.0
+    ],
+    "release": [
+     521.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.86,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 206
+    },
+    "raw": [
+     {
+      "grasp_u": 358,
+      "grasp_v": 270,
+      "release_u": 521,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:19",
+    "decision": "approved"
+   }
+  ]
+ },
+ "74": {
+  "layout_id": "D-75",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     434.0,
+     242.0
+    ],
+    "release": [
+     257.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.25,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 434,
+      "grasp_v": 242,
+      "release_u": 257,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:20",
+    "decision": "approved"
+   }
+  ]
+ },
+ "75": {
+  "layout_id": "D-76",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     333.0,
+     298.0
+    ],
+    "release": [
+     524.0,
+     254.0
+    ],
+    "attempts": 1,
+    "latency_s": 3.27,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 217
+    },
+    "raw": [
+     {
+      "grasp_u": 333,
+      "grasp_v": 298,
+      "release_u": 524,
+      "release_v": 254
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:22",
+    "decision": "approved"
+   }
+  ]
+ },
+ "76": {
+  "layout_id": "D-77",
+  "instruction": "put the green D in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     432.0,
+     254.0
+    ],
+    "release": [
+     259.0,
+     315.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.35,
+    "usage": {
+     "input_tokens": 1055,
+     "output_tokens": 170
+    },
+    "raw": [
+     {
+      "grasp_u": 432,
+      "grasp_v": 254,
+      "release_u": 259,
+      "release_v": 315
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:22",
+    "decision": "approved"
+   }
+  ]
+ },
+ "77": {
+  "layout_id": "D-78",
+  "instruction": "put the blue B in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     335.0,
+     282.0
+    ],
+    "release": [
+     259.0,
+     314.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.88,
+    "usage": {
+     "input_tokens": 1056,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 335,
+      "grasp_v": 282,
+      "release_u": 259,
+      "release_v": 314
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:24",
+    "decision": "approved"
+   }
+  ]
+ },
+ "78": {
+  "layout_id": "D-79",
+  "instruction": "put the orange cube in the pink tumbler",
+  "candidates": [
+   {
+    "grasp": [
+     369.0,
+     304.0
+    ],
+    "release": [
+     258.0,
+     316.0
+    ],
+    "attempts": 1,
+    "latency_s": 1.79,
+    "usage": {
+     "input_tokens": 1057,
+     "output_tokens": 121
+    },
+    "raw": [
+     {
+      "grasp_u": 369,
+      "grasp_v": 304,
+      "release_u": 258,
+      "release_v": 316
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:24",
+    "decision": "approved"
+   }
+  ]
+ },
+ "79": {
+  "layout_id": "D-80",
+  "instruction": "put the blue B in the mug",
+  "candidates": [
+   {
+    "grasp": [
+     354.0,
+     293.0
+    ],
+    "release": [
+     522.0,
+     253.0
+    ],
+    "attempts": 1,
+    "latency_s": 2.97,
+    "usage": {
+     "input_tokens": 1052,
+     "output_tokens": 235
+    },
+    "raw": [
+     {
+      "grasp_u": 354,
+      "grasp_v": 293,
+      "release_u": 522,
+      "release_v": 253
+     }
+    ],
+    "model": "claude-opus-5-5",
+    "prompt": "mark_prompt_v1.md",
+    "asked_at": "2026-11-27 14:18:27",
+    "decision": "approved"
+   }
+  ]
+ }
+}
